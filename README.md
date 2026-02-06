@@ -5,5 +5,8 @@
 2-Parallel (mpi4py, Pyccel, PETSc): "Traffic/petsc4py" folder
 ### Reference
 - [arXiv paper](https://arxiv.org/abs/2306.13543)
-- To cite: ``` Machtalay, Amal and HABBAL, Abderrahmane and Ratnani, Ahmed and Kissami, Imad, Computational Investigations of a Multi-Class Traffic Flow Model: Mean-Field and Microscopic Dynamics. Available at SSRN: https://ssrn.com/abstract=4880017 or http://dx.doi.org/10.2139/ssrn.4880017 ```
+- To cite: ``` A. Machtalay et al. “Computational investigations of a multi-class traffic flow model: Mean-
+field and microscopic dynamics”. In: Transportation Research Part B: Methodological 195
+(2025), p. 103196. issn: 0191-2615. doi: https://doi.org/10.1016/j.trb.2025.103196.
+url: https://www.sciencedirect.com/science/article/pii/S0191261525000451. ```
   
