@@ -406,54 +406,6 @@ A complete gallery of the numerical results, including **12 scientific figures**
 
 </details>
 
-<br>
-
-<details>
-<summary><strong>📈 4. Numerical Solver Performance</strong></summary>
-
-<br>
-
-The computational investigations examine:
-
-- Nonlinear solver convergence.
-- Numerical conditioning.
-- Regularization effects.
-- Computational efficiency.
-- Large-scale numerical performance.
-- Parallel computing strategies.
-
-**References:**
-[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.6 and II.10](https://theses.hal.science/tel-05806256/document)
-
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🖼️ 5. Scientific Results Gallery — Planned Organization</strong></summary>
-
-<br>
-
-The numerical results will be organized into the following categories:
-
-| Gallery | Scientific Objective |
-|:---|:---|
-| Traffic Density Fields | Visualize class-dependent density evolution |
-| Optimal Velocity Fields | Analyze vehicle strategies |
-| Space–Time Diagrams | Investigate congestion and traffic propagation |
-| Micro–Macro Comparisons | Compare finite-player and mean-field controls |
-| ε-Nash Accuracy | Study the approximation of Nash equilibria |
-| Numerical Convergence | Evaluate solver behavior |
-| HPC Performance | Investigate computational scalability |
-
-Representative figures from the paper and PhD thesis will be integrated as source image files or regenerated from numerical outputs.
-
-</details>
-
-</details>
-
 ---
 
 <details>
