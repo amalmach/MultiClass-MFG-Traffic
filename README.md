@@ -181,13 +181,13 @@ For each vehicle class $j=1,\ldots,J$, the model couples:
 
 The resulting system is:
 
-$$
-\begin{aligned}
+<p align="center">
+$\begin{aligned}
 \partial_t \rho_j + \partial_x(\rho_j u_j) &= 0,\\
 \partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) &= 0,\\
 u_j &= \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho}).
-\end{aligned}
-$$
+\end{aligned}$
+</p>
 
 where:
 
@@ -202,14 +202,14 @@ where:
 
 The Hamiltonian associated with class $j$ is defined by:
 
-$$
-H_j(p_j,\boldsymbol{\rho})
+<p align="center">
+$H_j(p_j,\rho)
 =
 \min_{0\leq\alpha\leq u_{\max}^j}
 \left\{
 f_j(\alpha,\boldsymbol{\rho})+\alpha p_j
-\right\}.
-$$
+\right\}.$
+</p>
 
 The published numerical experiments consider periodic boundary conditions on a ring road.
 
