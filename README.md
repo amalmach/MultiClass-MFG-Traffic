@@ -181,15 +181,13 @@ For each vehicle class $j=1,\ldots,J$, the model couples:
 
 The resulting system is:
 
-```math
-\boxed{
+$$
 \begin{aligned}
-\partial_t \rho_j + \partial_x(\rho_j u_j) &= 0, \\[6pt]
-\partial_t V_j + H_j(\partial_x V_j, \boldsymbol{\rho}) &= 0, \\[6pt]
-u_j &= \partial_{p_j} H_j(\partial_x V_j, \boldsymbol{\rho}).
+\partial_t \rho_j + \partial_x(\rho_j u_j) &= 0,\\
+\partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) &= 0,\\
+u_j &= \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho}).
 \end{aligned}
-}
-```
+$$
 
 where:
 
@@ -199,19 +197,19 @@ where:
 | $u_j$ | Optimal velocity field of class $j$ |
 | $V_j$ | Optimal value function of class $j$ |
 | $H_j$ | Hamiltonian associated with class $j$ |
-| $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
+| $\rho$ | Vector of class-dependent traffic densities |
 | $J$ | Number of vehicle classes |
 
 The Hamiltonian associated with class $j$ is defined by:
 
-```math
+$$
 H_j(p_j,\boldsymbol{\rho})
 =
-\min_{0 \leq \alpha \leq u_{\max}^j}
+\min_{0\leq\alpha\leq u_{\max}^j}
 \left\{
 f_j(\alpha,\boldsymbol{\rho})+\alpha p_j
 \right\}.
-```
+$$
 
 The published numerical experiments consider periodic boundary conditions on a ring road.
 
