@@ -175,23 +175,11 @@ At the macroscopic level, traffic is represented through class-dependent density
 
 For each vehicle class $j=1,\ldots,J$, the model couples:
 
-1. A forward continuity equation.
-2. A backward Hamilton–Jacobi–Bellman equation.
-3. An optimal velocity feedback law.
+**1. A forward continuity equation**: $\displaystyle \partial_t \rho_j + \partial_x(\rho_j u_j) = 0$
 
-The resulting system couples three equations:
+**2. A backward Hamilton–Jacobi–Bellman equation**: $\displaystyle \partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) = 0$
 
-**1. Continuity equation**
-
-$\displaystyle \partial_t \rho_j + \partial_x(\rho_j u_j) = 0$
-
-**2. Hamilton–Jacobi–Bellman equation**
-
-$\displaystyle \partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) = 0$
-
-**3. Optimal feedback law**
-
-$\displaystyle u_j = \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho})$
+**3. An optimal velocity feedback law**: $\displaystyle u_j = \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho})$
 
 where:
 
@@ -201,6 +189,7 @@ where:
 | $u_j$ | Optimal velocity field of class $j$ |
 | $V_j$ | Optimal value function of class $j$ |
 | $H_j$ | Hamiltonian associated with class $j$ |
+| $p_j$ | Gradient of $V_j$ ($p_j=\partial_x V_j$) |
 | $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
 | $J$ | Number of vehicle classes |
 
