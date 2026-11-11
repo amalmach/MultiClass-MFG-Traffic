@@ -547,98 +547,6 @@ This creates a local working branch where users can modify code and conduct expe
 
 Users who want their own GitHub-hosted copy can also **fork the repository**.
 
-### Planned Software Improvements
-
-The repository will be progressively organized to support:
-
-- Reusable numerical solvers.
-- Configurable traffic models.
-- Independent computational experiments.
-- Reproducible numerical results.
-- Scientific visualization.
-- Automated numerical tests.
-- Educational tutorials.
-
-Detailed installation and execution instructions will be added after verification of the existing and extended implementations.
-
-</details>
-
----
-
-<details>
-<summary><h2>🎓 Tutorials & Learning Resources</h2></summary>
-
-<br>
-
-The project is intended for different audiences.
-
-<details>
-<summary><strong>📚 For Students</strong></summary>
-
-<br>
-
-Suggested learning pathway:
-
-1. Introduction to Mean-Field Games.
-2. Microscopic traffic modeling.
-3. Macroscopic traffic models.
-4. Hamilton–Jacobi–Bellman equations.
-5. Continuity equations.
-6. Numerical discretization.
-7. Traffic simulation.
-8. Interpretation of numerical results.
-
-**Recommended starting point:**
-
-Research paper, Sections 1–2.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🔬 For Researchers</strong></summary>
-
-<br>
-
-Research-oriented topics include:
-
-- Multi-population Mean-Field Games.
-- Finite-player differential games.
-- Nash equilibria and ε-Nash approximation.
-- Coupled forward–backward PDE systems.
-- Numerical linear algebra.
-- Newton–Krylov methods.
-- Preconditioning and regularization.
-- Large-scale computational methods.
-
-**Recommended reading:**
-
-PhD Thesis, Chapter II.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>⚙️ For Engineers</strong></summary>
-
-<br>
-
-Engineering-oriented topics include:
-
-- Multi-class traffic modeling.
-- Interactions between vehicle populations.
-- Traffic congestion analysis.
-- Optimal velocity strategies.
-- Numerical simulations.
-- Computational performance.
-- High-performance computing.
-
-The numerical framework provides a research-oriented tool for investigating traffic dynamics under different mathematical modeling assumptions.
-
-</details>
-
 </details>
 
 ---
@@ -694,17 +602,6 @@ This release preserves a reference snapshot of the repository before subsequent 
 **[Amal Machtalay](https://github.com/amalmach)**
 
 This repository originated from collaborative research associated with the scientific publication cited above.
-
-The original commits and historical contributors remain acknowledged through the repository's Git history.
-
-Ongoing development focuses on:
-
-- Multi-class traffic modeling.
-- Numerical solver improvements.
-- High-performance computing.
-- Reproducible numerical experiments.
-- Scientific documentation.
-- Tutorials and educational resources.
 
 The existing software license and applicable contributor notices remain in force.
 
