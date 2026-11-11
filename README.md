@@ -411,13 +411,6 @@ The scenarios are combined with different traffic cost functionals to investigat
 [Research paper, §4](https://doi.org/10.1016/j.trb.2025.103196) ·
 [PhD thesis, Chapter II, §§II.5 and II.7](https://theses.hal.science/tel-05806256/document)
 
-<br>
-
-📊 **[Explore the Scientific Figures Gallery](results/figures/README.md)**
-
-The gallery provides additional context, scientific references,
-and documentation for the numerical experiments.
-
 
 </details>
 
@@ -459,6 +452,13 @@ model, corresponding to Figure II.4 of the PhD thesis.
 **References:**
 [Research paper, §4.1](https://doi.org/10.1016/j.trb.2025.103196) ·
 [PhD thesis, Chapter II, §II.7](https://theses.hal.science/tel-05806256/document)
+
+<br>
+
+📊 **[Explore the Scientific Figures Gallery](results/figures/README.md)**
+
+The gallery provides additional context, scientific references,
+and documentation for the numerical experiments.
 
 
 ### Scientific Figures
