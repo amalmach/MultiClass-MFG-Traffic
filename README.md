@@ -179,15 +179,19 @@ For each vehicle class $j=1,\ldots,J$, the model couples:
 2. A backward Hamilton–Jacobi–Bellman equation.
 3. An optimal velocity feedback law.
 
-The resulting system is:
+The resulting system couples three equations:
 
-<p align="center">
-$\begin{aligned}
-\partial_t \rho_j + \partial_x(\rho_j u_j) &= 0,\\
-\partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) &= 0,\\
-u_j &= \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho}).
-\end{aligned}$
-</p>
+**1. Continuity equation**
+
+$\displaystyle \partial_t \rho_j + \partial_x(\rho_j u_j) = 0$
+
+**2. Hamilton–Jacobi–Bellman equation**
+
+$\displaystyle \partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) = 0$
+
+**3. Optimal feedback law**
+
+$\displaystyle u_j = \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho})$
 
 where:
 
@@ -197,13 +201,13 @@ where:
 | $u_j$ | Optimal velocity field of class $j$ |
 | $V_j$ | Optimal value function of class $j$ |
 | $H_j$ | Hamiltonian associated with class $j$ |
-| $\rho$ | Vector of class-dependent traffic densities |
+| $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
 | $J$ | Number of vehicle classes |
 
 The Hamiltonian associated with class $j$ is defined by:
 
 <p align="center">
-$H_j(p_j,\rho)
+$H_j(p_j,\boldsymbol{\rho})
 =
 \min_{0\leq\alpha\leq u_{\max}^j}
 \left\{
