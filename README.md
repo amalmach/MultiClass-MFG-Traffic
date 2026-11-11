@@ -191,7 +191,7 @@ where:
 | $u^j$ | Optimal velocity field of class $j$ |
 | $V^j$ | Optimal value function of class $j$ |
 | $H_j$ | Hamiltonian associated with class $j$ |
-| $p_j$ | Gradient of $V_j$ ($p_j=\partial_x V_j$) |
+| $p_j$ | Gradient of $V^j$ ($p_j=\partial_x V^j$) |
 | $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
 | $J$ | Number of vehicle classes |
 
@@ -227,13 +227,7 @@ The research investigates the relationship between:
 - Macroscopic Nash Mean-Field Game equilibria.
 - Vehicle-level controls reconstructed from the mean-field solution.
 
-Starting from an optimal macroscopic velocity field, microscopic controls are constructed through:
-
-$$
-\widehat{v}_i^j(t)
-=
-u_j^*\left(t,x_i^j(t)\right).
-$$
+Starting from an optimal macroscopic velocity field, microscopic controls are constructed through: $\widehat{v}_i^j(t) = u_j^*\left(t,x_i^j(t)\right).$
 
 The resulting strategies are compared with microscopic best-response controls.
 
@@ -244,9 +238,8 @@ The approximation quality is studied through differences between individual cost
 These comparisons provide numerical evidence supporting the ε-Nash approximation.
 
 **References:**
-
-- Research paper, Section 2.2.
-- PhD Thesis, Chapter II, Section II.8.
+[Research paper, §2.2](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.4.8](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
