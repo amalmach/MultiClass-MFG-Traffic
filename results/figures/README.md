@@ -337,9 +337,9 @@ The experiments consider the single-class traffic model.
 
 The comparisons focus on the relationship between:
 
-- Mean-field-derived controls.
-- Finite-player best-response strategies.
-- Associated individual costs.
+- Mean-field-derived controls $\hat{v}$.
+- Finite-player best-response strategies $\bar{v}$.
+- Associated individual costs $J_{\hat{v}}, J_{\bar{v}}$.
 
 These results support the numerical investigation of the
 connection between mean-field equilibria and finite-player games.
