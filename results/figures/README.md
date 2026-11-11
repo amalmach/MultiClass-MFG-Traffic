@@ -361,10 +361,6 @@ strategies and finite-player best responses for one-class traffic.
 
 <br>
 
-**Model:** Single-class microscopic traffic game.
-
-**Scientific context:** Mean-field approximation of finite-player strategies.
-
 **References:** [PhD thesis, Chapter II, Figure II.7](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 9](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -409,12 +405,6 @@ heterogeneous two-class systems under GS and GNS cost functionals.
 
 <br>
 
-**Model:** Two-class microscopic traffic game.
-
-**Vehicle classes:** Cars and trucks.
-
-**Configurations:** TC, CT, and TCT.
-
 **References:** [PhD thesis, Chapter II, Figure II.9](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 5](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -454,10 +444,6 @@ equilibrium controls and microscopic best-response controls.
 </div>
 
 <br>
-
-**Model:** Two-class traffic mean-field game.
-
-**Scientific context:** Comparison of macroscopic and microscopic optimal strategies.
 
 **References:** [PhD thesis, Chapter II, Figure II.10](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 7](https://doi.org/10.1016/j.trb.2025.103196).
