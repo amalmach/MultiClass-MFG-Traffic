@@ -427,12 +427,6 @@ The following numerical results illustrate the macroscopic dynamics
 of heterogeneous traffic under the **Generalized Lighthill–Whitham–
 Richards (GLWR)** cost functional.
 
-The simulations investigate three initial configurations:
-
-- **CT:** Fully segregated configuration with cars in front.
-- **TC:** Fully segregated configuration with trucks in front.
-- **TCT:** Interlaced configuration with alternating cars and trucks.
-
 The results illustrate the evolution of class-dependent traffic
 densities, optimal velocity fields, and value functions.
 
