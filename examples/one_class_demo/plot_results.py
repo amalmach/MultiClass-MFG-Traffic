@@ -25,6 +25,12 @@ All figures are saved as PNG files.
 from pathlib import Path
 
 import numpy as np
+import matplotlib
+
+# Use a non-interactive backend for Binder and headless environments.
+# This must be set before importing matplotlib.pyplot.
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
