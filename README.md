@@ -419,8 +419,8 @@ The repository contains numerical implementations associated with Mean-Field Gam
 
 | Directory | Description |
 |:---|:---|
-| `Traffic/newton_krylov/` | Newton–Krylov numerical implementations |
-| `Traffic/petsc4py/` | PETSc-based parallel implementations |
+| [`src/newton_krylov/`](src/newton_krylov/) | Newton–Krylov numerical implementations |
+| [`src/petsc4py/`](src/petsc4py/) | PETSc-based parallel implementations |
 
 ### Working with the Code Locally
 
