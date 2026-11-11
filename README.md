@@ -413,30 +413,22 @@ A complete gallery of the numerical results, including **12 scientific figures**
 
 <br>
 
-The repository contains numerical implementations associated with Mean-Field Game-based traffic modeling.
+The repository provides numerical implementations for solving
+**single-class and multi-class Nash Mean-Field Game traffic models**.
 
-### Existing Research Code
+The computational framework includes **Newton–Krylov algorithms,
+finite-difference methods, and PETSc-based parallel implementations**.
 
-| Directory | Description |
-|:---|:---|
-| [`src/newton_krylov/`](src/newton_krylov/) | Newton–Krylov numerical implementations |
-| [`src/petsc4py/`](src/petsc4py/) | PETSc-based parallel implementations |
+Detailed information about the code organization, numerical methods,
+and execution procedures is provided in the dedicated source-code documentation.
 
-### Working with the Code Locally
+<div align="center">
 
-Researchers, engineers, and students can clone the repository and work independently.
+### 💻 [Explore the Source Code & Numerical Implementations](src/README.md)
 
-```bash
-git clone https://github.com/amalmach/MultiClass-MFG-Traffic.git
+<sub>Newton–Krylov Methods · PETSc · Parallel Computing · Numerical Experiments</sub>
 
-cd MultiClass-MFG-Traffic
-
-git switch -c experiments/my-traffic-study
-```
-
-This creates a local working branch where users can modify code and conduct experiments without affecting the original repository.
-
-Users who want their own GitHub-hosted copy can also **fork the repository**.
+</div>
 
 </details>
 
