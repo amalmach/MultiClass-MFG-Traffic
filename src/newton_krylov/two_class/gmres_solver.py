@@ -7,7 +7,7 @@ Created on Wed Aug 31 18:59:43 2022
 """
 
 import numpy as np
-from scipy.optimize.nonlin import newton_krylov
+from scipy.optimize import newton_krylov
 from inputs import inputs, f_starp, f_star, rho1_int, rho2_int, VT
 from indx_funcs import solutions
 from newton_func import newton_func
