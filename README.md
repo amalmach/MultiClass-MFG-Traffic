@@ -87,23 +87,37 @@ Development and investigation of computational methodologies combining:
 - Newton-type nonlinear iterations.
 - Newton–Krylov methods.
 - LGMRES iterative solvers.
-- Regularization techniques.
+- Regularization-continuation techniques.
 - Preconditioning and initialization strategies.
 - Parallel computing.
 
-### 4. Multi-Class Numerical Simulations
+### 4. Investigation of Different Initial Traffic Configurations
+
+Systematic numerical investigation of three distinct initial spatial configurations of cars and trucks to analyze the influence of vehicle-class distributions on multi-class traffic dynamics.
+
+The three configurations considered are:
+
+| Configuration | Description |
+|:---:|:---|
+| **CT — Cars–Trucks** | Fully segregated configuration with cars initially positioned in front of trucks. |
+| **TC — Trucks–Cars** | Fully segregated configuration with trucks initially positioned in front of cars. |
+| **TCT — Trucks–Cars–Trucks** | Interlaced configuration with alternating groups of trucks and cars. |
+
+These configurations are investigated under different traffic cost functionals (**GLWR, GS, and GNS**).
+
+### 5. Multi-Class Numerical Simulations
 
 Extensive numerical investigations involving different configurations of cars and trucks.
 
 The simulations analyze density evolution, class-dependent velocities, interactions between vehicle populations, and numerical regularity.
 
-### 5. Micro–Macro Consistency
+### 6. Micro–Macro Consistency
 
 Numerical comparison of macroscopic mean-field controls and microscopic best-response strategies.
 
 The investigations provide computational evidence supporting the effectiveness of the ε-Nash approximation.
 
-### 6. High-Performance Computing
+### 7. High-Performance Computing
 
 The associated publication reports numerical investigations of nonlinear systems involving up to approximately **88 million unknowns**.
 
