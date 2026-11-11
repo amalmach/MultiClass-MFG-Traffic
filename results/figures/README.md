@@ -470,9 +470,9 @@ accuracy for the single-class traffic game.
 
 The analysis includes:
 
-- Mean approximation errors.
-- Maximum approximation errors.
-- Log–log representations of numerical convergence.
+- Mean approximation errors: MeanRA
+- Maximum approximation errors: MaxRA
+- Log–log representations of numerical convergence: log(MeanRA), log(MaxRA)
 
 These experiments help quantify how accurately mean-field-derived
 strategies approximate equilibria in finite-player systems.
@@ -494,10 +494,6 @@ and log–log convergence analysis for one-class traffic.
 
 <br>
 
-**Model:** Single-class finite-player traffic game.
-
-**Scientific context:** Numerical evaluation of mean-field approximation accuracy.
-
 **References:** [PhD thesis, Chapter II, Figure II.8](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 10](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -515,9 +511,9 @@ for a heterogeneous finite-player traffic game.
 
 The numerical experiments examine:
 
-- Mean approximation errors.
-- Maximum approximation errors.
-- Log–log convergence behavior.
+- Mean approximation errors: MeanRA
+- Maximum approximation errors: MaxRA
+- Log–log representations of numerical convergence: log(MeanRA), log(MaxRA)
 
 The results provide numerical evidence about the approximation
 of finite-player Nash equilibria by multi-class mean-field
@@ -540,10 +536,6 @@ and log–log convergence analysis for heterogeneous two-class traffic.
 
 <br>
 
-**Model:** Two-class finite-player traffic game.
-
-**Scientific context:** Numerical ε-Nash approximation analysis.
-
 **References:** [PhD thesis, Chapter II, Figure II.11](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 6](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -563,9 +555,9 @@ solutions associated with the single-class traffic models.
 
 The analysis considers numerical matrices corresponding to:
 
-- Traffic density.
-- Optimal velocity.
-- Optimal cost.
+- Traffic density $\rho$.
+- Optimal velocity $u$.
+- Optimal cost $V$.
 
 Normalized singular-value decay is investigated across
 different spatial and temporal grid resolutions and
@@ -591,10 +583,6 @@ density, velocity, and optimal-cost matrices.
 </div>
 
 <br>
-
-**Model:** Single-class traffic models.
-
-**Scientific context:** Numerical rank structure and low-rank approximation.
 
 **Reference:** [PhD thesis, Chapter II, Figure II.12](https://theses.hal.science/tel-05806256/document).
 
