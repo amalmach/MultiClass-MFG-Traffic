@@ -421,14 +421,39 @@ The scenarios are combined with different traffic cost functionals to investigat
 
 <br>
 
-The macroscopic numerical investigations analyze:
+### GLWR Model — Macroscopic Traffic Dynamics
 
-- Traffic density evolution.
-- Class-dependent velocity fields.
-- Optimal value functions.
-- Congestion dynamics.
-- Interactions between vehicle populations.
-- Numerical regularity and shock formation.
+The following numerical results illustrate the macroscopic dynamics
+of heterogeneous traffic under the **Generalized Lighthill–Whitham–
+Richards (GLWR)** cost functional.
+
+The simulations investigate three initial configurations:
+
+- **CT:** Fully segregated configuration with cars in front.
+- **TC:** Fully segregated configuration with trucks in front.
+- **TCT:** Interlaced configuration with alternating cars and trucks.
+
+The results illustrate the evolution of class-dependent traffic
+densities, optimal velocity fields, and value functions.
+
+<br>
+
+<div align="center">
+
+<img src="results/figures/glwr_traffic_configurations.png"
+     alt="GLWR multi-class traffic simulation results"
+     width="850">
+
+<br>
+
+<sub>
+<b>Figure 1.</b> Macroscopic numerical results for the GLWR traffic
+model, corresponding to Figure II.4 of the PhD thesis.
+</sub>
+
+</div>
+
+<br>
 
 **References:**
 [Research paper, §4.1](https://doi.org/10.1016/j.trb.2025.103196) ·
