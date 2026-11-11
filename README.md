@@ -160,7 +160,9 @@ The resulting system is formulated as a **finite-player differential game**.
 
 The objective is to investigate the strategic behavior of interacting vehicle populations and relate it to the corresponding macroscopic description.
 
-**Reference:** Research paper, Section 2.1.
+**References:**
+[Research paper, §2.1](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.4.1–II.4.2](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -175,19 +177,19 @@ At the macroscopic level, traffic is represented through class-dependent density
 
 For each vehicle class $j=1,\ldots,J$, the model couples:
 
-**1. A forward continuity equation**: $\displaystyle \partial_t \rho_j + \partial_x(\rho_j u_j) = 0$
+**1. A forward continuity equation**: $\displaystyle \partial_t \rho^j + \partial_x(\rho^j u^j) = 0$
 
-**2. A backward Hamilton–Jacobi–Bellman equation**: $\displaystyle \partial_t V_j + H_j(\partial_x V_j,\boldsymbol{\rho}) = 0$
+**2. A backward Hamilton–Jacobi–Bellman equation**: $\displaystyle \partial_t V^j + H_j(\partial_x V^j,\boldsymbol{\rho}) = 0$
 
-**3. An optimal velocity feedback law**: $\displaystyle u_j = \partial_{p_j}H_j(\partial_x V_j,\boldsymbol{\rho})$
+**3. An optimal velocity feedback law**: $\displaystyle u^j = \partial_{p_j}H_j(\partial_x V^j,\boldsymbol{\rho})$
 
 where:
 
 | Symbol | Description |
 |:---|:---|
-| $\rho_j$ | Traffic density of vehicle class $j$ |
-| $u_j$ | Optimal velocity field of class $j$ |
-| $V_j$ | Optimal value function of class $j$ |
+| $\rho^j$ | Traffic density of vehicle class $j$ |
+| $u^j$ | Optimal velocity field of class $j$ |
+| $V^j$ | Optimal value function of class $j$ |
 | $H_j$ | Hamiltonian associated with class $j$ |
 | $p_j$ | Gradient of $V_j$ ($p_j=\partial_x V_j$) |
 | $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
@@ -206,7 +208,9 @@ f_j(\alpha,\boldsymbol{\rho})+\alpha p_j
 
 The published numerical experiments consider periodic boundary conditions on a ring road.
 
-**Reference:** Research paper, Section 2.1.
+**References:**
+[Research paper, §2.1](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.4.3–II.4.7](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
