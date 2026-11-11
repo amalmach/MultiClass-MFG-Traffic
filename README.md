@@ -54,7 +54,7 @@ The research also investigates the ability of **mean-field equilibrium controls 
 
 ### 🚀 Interactive Demonstrations
 
-Explore the numerical methods directly in your browser using Binder.
+Explore the numerical methods directly in your browser using 
 [![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb)
 
 </details>
