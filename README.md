@@ -239,7 +239,7 @@ These comparisons provide numerical evidence supporting the ε-Nash approximatio
 
 **References:**
 [Research paper, §2.2](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.4.8](https://theses.hal.science/tel-05806256/document)
+[PhD thesis, Chapter II, §II.4.8](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -297,7 +297,9 @@ The numerical formulation includes:
 
 The resulting discretization produces a coupled nonlinear system involving the unknown density, velocity, and value-function variables.
 
-**Reference:** Research paper, Section 3.1.
+**References:**
+[Research paper, §3.1](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §II.6.1](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -316,12 +318,14 @@ The computational approach includes:
 - Krylov subspace methods.
 - LGMRES iterative linear solvers.
 - Numerical treatment of ill-conditioned Jacobians.
-- Regularization techniques.
+- Regularization-continuation techniques.
 - Preconditioning and initialization strategies.
 
 These methodologies are investigated to improve numerical robustness and enable larger computational experiments.
 
-**Reference:** PhD Thesis, Chapter II, Section II.6.
+**References:**
+[Research paper, §3.2](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §II.6.2-II.6.9](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -347,7 +351,9 @@ The computational tools include:
 
 The associated research reports experiments involving nonlinear systems of up to approximately **88 million unknowns**.
 
-**Reference:** PhD Thesis, Chapter II, Section II.6.
+**References:**
+[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §II.6](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -371,9 +377,8 @@ The research investigates several numerical challenges associated with coupled f
 These issues motivate the investigation of advanced numerical methods and scalable computational approaches.
 
 **References:**
-
-- PhD Thesis, Chapter II, Section II.6.
-- PhD Thesis, Chapter II, Section II.10.
+[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.6 and II.10](https://theses.hal.science/tel-05806256/document)
 
 </details>
 
@@ -403,7 +408,10 @@ Three initial configurations of cars and trucks are investigated.
 
 The scenarios are combined with different traffic cost functionals to investigate interactions between vehicle populations.
 
-**Reference:** Research paper, Section 4.
+**References:**
+[Research paper, §4](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.5 and II.7](https://theses.hal.science/tel-05806256/document)
+
 
 </details>
 
@@ -423,7 +431,10 @@ The macroscopic numerical investigations analyze:
 - Interactions between vehicle populations.
 - Numerical regularity and shock formation.
 
-**Reference:** PhD Thesis, Chapter II, Section II.7.
+**References:**
+[Research paper, §4.1](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §II.7](https://theses.hal.science/tel-05806256/document)
+
 
 ### Scientific Figures
 
@@ -450,7 +461,10 @@ The microscopic experiments investigate:
 
 These numerical experiments evaluate the consistency between microscopic and macroscopic traffic descriptions.
 
-**Reference:** PhD Thesis, Chapter II, Section II.8.
+**References:**
+[Research paper, §4.2](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §II.8](https://theses.hal.science/tel-05806256/document)
+
 
 </details>
 
@@ -471,9 +485,9 @@ The computational investigations examine:
 - Parallel computing strategies.
 
 **References:**
+[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
+[PhD thesis, Chapter II, §§II.6 and II.10](https://theses.hal.science/tel-05806256/document)
 
-- PhD Thesis, Chapter II, Section II.6.
-- PhD Thesis, Chapter II, Section II.10.
 
 </details>
 
