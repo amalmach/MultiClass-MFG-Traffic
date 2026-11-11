@@ -146,17 +146,13 @@ The mathematical framework connects individual vehicle dynamics with collective 
 
 At the microscopic level, vehicles are modeled as individual agents belonging to different classes.
 
-For vehicle \(i\) of class \(j\), its position evolves according to:
-
-$$
-d x_i^j(t)=v_i^j(t) dt,
-$$
+For vehicle $i$ of class $j$, its position evolves according to: $d x_i^j(t)=v_i^j(t) dt,$
 
 where:
 
 - $x_i^j(t)$ is the vehicle position.
-- \(v_i^j(t)\) is its velocity control.
-- \(j\) denotes the vehicle class.
+- $v_i^j(t)$ is its velocity control.
+- $j$ denotes the vehicle class.
 
 Each vehicle seeks to minimize an individual cost functional depending on its control, its trajectory, and interactions with other vehicles.
 
@@ -177,7 +173,7 @@ The objective is to investigate the strategic behavior of interacting vehicle po
 
 At the macroscopic level, traffic is represented through class-dependent density and velocity fields.
 
-For each vehicle class \(j=1,\ldots,J\), the model couples:
+For each vehicle class $j=1,\ldots,J$, the model couples:
 
 1. A forward continuity equation.
 2. A backward Hamilton–Jacobi–Bellman equation.
