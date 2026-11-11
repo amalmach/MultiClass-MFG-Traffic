@@ -17,9 +17,12 @@ Visualizations:
     3. Initial and final available velocities
     4. Velocity evolution: 3D surface
     5. Optimal value function: 3D surface
-    6. Density, velocity and optimal cost at four times
+    6. Normalized density, velocity and value function
+       at four time snapshots
 
 All figures are saved as PNG files.
+
+Compatible with local Python and Binder environments.
 """
 
 from pathlib import Path
@@ -27,8 +30,8 @@ from pathlib import Path
 import numpy as np
 import matplotlib
 
-# Use a non-interactive backend for Binder and headless environments.
-# This must be set before importing matplotlib.pyplot.
+# Non-interactive backend for Binder and headless environments.
+# This must be configured before importing pyplot.
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -44,65 +47,107 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_FILE = BASE_DIR / "lwr_solution_grid0.npz"
 
 PLOTS_DIR = BASE_DIR / "plots"
-PLOTS_DIR.mkdir(exist_ok=True)
+PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ============================================================
 # 2. Load numerical results
 # ============================================================
 
+if not DATA_FILE.exists():
+    raise FileNotFoundError(
+        f"Numerical results not found: {DATA_FILE}\n"
+        "Run run_demo.py before generating the figures."
+    )
+
 data = np.load(DATA_FILE)
 
-s_rho = data["density"]
-s_u = data["velocity"]
-s_V = data["value"]
+# Numerical solution
+s_rho = np.asarray(data["density"])
+s_u = np.asarray(data["velocity"])
+s_V = np.asarray(data["value"])
 
+# Grid parameters
 Nx = int(data["Nx"])
 Nt = int(data["Nt"])
 
 L = float(data["L"])
 dt = float(data["dt"])
 
+# Physical parameters selected in the simulation
+rho_jam = float(data["rho_jam"])
+u_max = float(data["u_max"])
+
+if rho_jam <= 0:
+    raise ValueError("rho_jam must be positive.")
+
+if u_max <= 0:
+    raise ValueError("u_max must be positive.")
+
 print("=" * 65)
 print("Single-Class LWR — Scientific Visualizations")
 print("=" * 65)
 
 print("\nNumerical solution:")
-print("Density shape:      ", s_rho.shape)
-print("Velocity shape:     ", s_u.shape)
-print("Value function shape:", s_V.shape)
+print("Density shape:        ", s_rho.shape)
+print("Velocity shape:       ", s_u.shape)
+print("Value function shape: ", s_V.shape)
+
+print("\nPhysical parameters:")
+print(f"Road length L:        {L}")
+print(f"Maximum velocity:     {u_max}")
+print(f"Jam density:          {rho_jam}")
+
+print("\nGrid parameters:")
+print(f"Nx:                   {Nx}")
+print(f"Nt:                   {Nt}")
+print(f"dt:                   {dt:.8f}")
 
 
 # ============================================================
 # 3. Spatial and temporal coordinates
 # ============================================================
 
-x_points = np.linspace(0.0, L, Nx + 1)
+# Spatial grid boundaries
+x_points = np.linspace(
+    0.0,
+    L,
+    Nx + 1,
+)
 
-# Cell-centered coordinates, as in the original notebook.
-c_points = x_points[:-1] + np.diff(x_points) / 2
+# Spatial cell centers
+c_points = 0.5 * (
+    x_points[:-1] + x_points[1:]
+)
 
-# Temporal coordinates are constructed according to
-# the actual number of columns in each numerical array.
-# This accounts for the staggered time discretization.
+# Temporal coordinates.
+# Density and value function typically have Nt+1
+# time levels, while velocity has Nt time levels.
 
 t_rho = np.arange(s_rho.shape[1]) * dt
 t_u = np.arange(s_u.shape[1]) * dt
 t_V = np.arange(s_V.shape[1]) * dt
 
 
+# ============================================================
+# 4. Validate numerical arrays
+# ============================================================
+
 def check_shape(array, name):
-    """Verify the spatial dimension before plotting."""
+    """
+    Check the spatial dimension of the numerical solution.
+    """
 
     if array.ndim != 2:
         raise ValueError(
-            f"{name} must be 2D; received {array.shape}"
+            f"{name} must be two-dimensional. "
+            f"Received shape: {array.shape}"
         )
 
     if array.shape[0] != Nx:
         raise ValueError(
             f"{name} has {array.shape[0]} spatial rows, "
-            f"but Nx={Nx}. Check the original solutions() indexing."
+            f"but Nx = {Nx}."
         )
 
 
@@ -112,10 +157,13 @@ check_shape(s_V, "Value function")
 
 
 # ============================================================
-# 4. Helper functions
+# 5. Helper functions
 # ============================================================
 
 def save_figure(fig, filename):
+    """
+    Save a figure in the demonstration plots directory.
+    """
 
     destination = PLOTS_DIR / filename
 
@@ -136,11 +184,17 @@ def plot_surface(
     filename,
     spatial_points=None,
 ):
+    """
+    Plot a 3D surface of a numerical solution.
+
+    The original solver stores arrays using:
+        (spatial dimension, temporal dimension)
+    """
 
     if spatial_points is None:
         spatial_points = c_points
 
-    # Match the original notebook's (Nx, Nt) layout.
+    # Construct the space-time mesh
     t_surf, x_surf = np.meshgrid(
         time,
         spatial_points,
@@ -149,10 +203,14 @@ def plot_surface(
     if t_surf.shape != variable.shape:
         raise ValueError(
             f"Shape mismatch for {title}: "
-            f"grid={t_surf.shape}, data={variable.shape}"
+            f"grid = {t_surf.shape}, "
+            f"solution = {variable.shape}"
         )
 
-    fig = plt.figure(figsize=(10, 6))
+    # Create 3D figure
+    fig = plt.figure(
+        figsize=(10, 6)
+    )
 
     ax = fig.add_subplot(
         111,
@@ -185,7 +243,6 @@ def plot_surface(
 
     save_figure(fig, filename)
 
-    plt.show()
     plt.close(fig)
 
 
@@ -193,7 +250,9 @@ def plot_surface(
 # FIGURE 1 — Initial and Terminal Density Distributions
 # ============================================================
 
-fig, ax = plt.subplots(figsize=(8, 5))
+fig, ax = plt.subplots(
+    figsize=(8, 5)
+)
 
 rho_initial = s_rho[:, 0]
 rho_terminal = s_rho[:, -1]
@@ -201,19 +260,26 @@ rho_terminal = s_rho[:, -1]
 ax.scatter(
     c_points,
     rho_initial,
-    s=20,
+    s=25,
+    color="blue",
     label="Initial density",
 )
 
 ax.scatter(
     c_points,
     rho_terminal,
-    s=20,
+    s=25,
+    color="red",
     label="Terminal density",
 )
 
-ax.set_xlabel("Road position $x$")
-ax.set_ylabel(r"Traffic density $\rho$")
+ax.set_xlabel(
+    "Road position $x$"
+)
+
+ax.set_ylabel(
+    r"Traffic density $\rho$"
+)
 
 ax.set_title(
     "LWR — Initial and Terminal Density Distributions"
@@ -229,12 +295,11 @@ save_figure(
     "lwr_initial_terminal_density.png",
 )
 
-plt.show()
 plt.close(fig)
 
 
 # ============================================================
-# FIGURE 2 — Density Surface
+# FIGURE 2 — Density Evolution: 3D Surface
 # ============================================================
 
 plot_surface(
@@ -250,7 +315,9 @@ plot_surface(
 # FIGURE 3 — Initial and Final Velocity Profiles
 # ============================================================
 
-fig, ax = plt.subplots(figsize=(8, 5))
+fig, ax = plt.subplots(
+    figsize=(8, 5)
+)
 
 u_initial = s_u[:, 0]
 u_final = s_u[:, -1]
@@ -258,22 +325,29 @@ u_final = s_u[:, -1]
 ax.scatter(
     c_points,
     u_initial,
-    s=20,
+    s=25,
+    color="blue",
     label="Initial velocity",
 )
 
 ax.scatter(
     c_points,
     u_final,
-    s=20,
+    s=25,
+    color="red",
     label="Final available velocity",
 )
 
-ax.set_xlabel("Road position $x$")
-ax.set_ylabel(r"Optimal velocity $u$")
+ax.set_xlabel(
+    "Road position $x$"
+)
+
+ax.set_ylabel(
+    r"Optimal velocity $u$"
+)
 
 ax.set_title(
-    "LWR — Initial and Final Available Velocity Profiles"
+    "LWR — Initial and Final Velocity Profiles"
 )
 
 ax.legend()
@@ -286,12 +360,11 @@ save_figure(
     "lwr_initial_final_velocity.png",
 )
 
-plt.show()
 plt.close(fig)
 
 
 # ============================================================
-# FIGURE 4 — Velocity Surface
+# FIGURE 4 — Optimal Velocity: 3D Surface
 # ============================================================
 
 plot_surface(
@@ -304,11 +377,11 @@ plot_surface(
 
 
 # ============================================================
-# FIGURE 5 — Optimal Cost / Value Function Surface
+# FIGURE 5 — Optimal Value Function: 3D Surface
 # ============================================================
 
-# The original notebook uses x_points[1:] for
-# the spatial representation of the value function.
+# Preserve the spatial convention used in the
+# original research plotting notebook.
 
 plot_surface(
     variable=s_V,
@@ -322,9 +395,45 @@ plot_surface(
 
 # ============================================================
 # FIGURE 6 — Four Time Snapshots
+# Normalized Density, Velocity and Value Function
 # ============================================================
 
-# Use time indices available in all three arrays.
+# ------------------------------------------------------------
+# Normalize density
+# ------------------------------------------------------------
+
+rho_normalized = s_rho / rho_jam
+
+# ------------------------------------------------------------
+# Normalize optimal velocity
+# ------------------------------------------------------------
+
+u_normalized = s_u / u_max
+
+# ------------------------------------------------------------
+# Normalize value function
+# ------------------------------------------------------------
+
+# Use the same global scale for every time snapshot.
+# This preserves relative differences between snapshots.
+
+V_scale = max(
+    float(np.max(np.abs(s_V))),
+    1e-12,
+)
+
+V_normalized = s_V / V_scale
+
+print("\nNormalization parameters:")
+print(f"rho_jam = {rho_jam}")
+print(f"u_max   = {u_max}")
+print(f"V_scale = {V_scale:.6e}")
+
+
+# ------------------------------------------------------------
+# Select common temporal levels
+# ------------------------------------------------------------
+
 n_common = min(
     s_rho.shape[1],
     s_u.shape[1],
@@ -333,11 +442,14 @@ n_common = min(
 
 if n_common < 4:
     raise ValueError(
-        "At least four common time levels are required."
+        "At least four common temporal levels are required."
     )
 
-# Follow the original notebook:
-# 0, 1/5, 2/5, and last available time.
+
+# ------------------------------------------------------------
+# Select four time snapshots
+# ------------------------------------------------------------
+
 snapshot_indices = [
     0,
     n_common // 5,
@@ -345,62 +457,105 @@ snapshot_indices = [
     n_common - 1,
 ]
 
+
+# ------------------------------------------------------------
+# Create scientific figure
+# ------------------------------------------------------------
+
 fig, axes = plt.subplots(
     1,
     4,
-    figsize=(20, 4),
+    figsize=(20, 4.5),
+    sharey=True,
 )
 
-for ax, k in zip(axes, snapshot_indices):
+for ax, k in zip(
+    axes,
+    snapshot_indices,
+):
 
+    # Normalized traffic density
     ax.plot(
         c_points,
-        s_rho[:, k],
-        "b",
-        label="Density",
+        rho_normalized[:, k],
+        color="blue",
+        linewidth=2,
+        label=r"$\rho/\rho_{\mathrm{jam}}$",
     )
 
+    # Normalized optimal velocity
     ax.plot(
         c_points,
-        s_u[:, k],
-        "g",
-        label="Velocity",
+        u_normalized[:, k],
+        color="green",
+        linewidth=2,
+        label=r"$u/u_{\max}$",
     )
 
+    # Normalized value function
     ax.plot(
         c_points,
-        s_V[:, k],
-        "r",
-        label="Optimal cost",
+        V_normalized[:, k],
+        color="red",
+        linewidth=2,
+        label=r"$V/V_{\mathrm{scale}}$",
     )
 
     ax.set_title(
-        f"t = {k * dt:.3f}"
+        f"t = {k * dt:.3f}",
+        fontsize=11,
     )
 
-    ax.set_xlabel("Road position $x$")
-    ax.grid(alpha=0.2)
+    ax.set_xlabel(
+        "Road position $x$"
+    )
 
-axes[0].set_ylabel("Computed quantities")
+    ax.grid(
+        True,
+        linestyle="--",
+        alpha=0.3,
+    )
 
-axes[-1].legend(
-    loc="upper left",
-    bbox_to_anchor=(1.02, 1),
+
+# ------------------------------------------------------------
+# Labels and legend
+# ------------------------------------------------------------
+
+axes[0].set_ylabel(
+    "Normalized quantities"
 )
 
 fig.suptitle(
-    "Single-Class LWR — Density, Velocity and Optimal Cost",
+    "Single-Class LWR — Density, Velocity and Value Function",
     fontsize=14,
 )
 
-fig.tight_layout()
+# Use the plotted lines as legend handles
+handles, labels = axes[0].get_legend_handles_labels()
+
+fig.legend(
+    handles,
+    labels,
+    loc="lower center",
+    ncol=3,
+    bbox_to_anchor=(0.5, -0.06),
+    frameon=False,
+)
+
+fig.tight_layout(
+    rect=[0, 0.08, 1, 0.95]
+)
+
+
+# ------------------------------------------------------------
+# Save Figure 6
+# ------------------------------------------------------------
 
 save_figure(
     fig,
     "lwr_density_velocity_optimal_cost.png",
 )
 
-plt.show()
 plt.close(fig)
 
 
