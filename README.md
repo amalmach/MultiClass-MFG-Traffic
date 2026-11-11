@@ -11,7 +11,6 @@
 [![Research Paper](https://img.shields.io/badge/Research_Paper-Elsevier-0B7285?style=for-the-badge)](https://doi.org/10.1016/j.trb.2025.103196)
 [![arXiv](https://img.shields.io/badge/Preprint-arXiv-B31B1B?style=for-the-badge)](https://arxiv.org/abs/2306.13543)
 [![PhD Thesis](https://img.shields.io/badge/PhD_Thesis-HAL-6F42C1?style=for-the-badge)](https://theses.hal.science/tel-05806256/document)
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb)
 
 <br>
 
@@ -52,6 +51,11 @@ The research also investigates the ability of **mean-field equilibrium controls 
 | Approximate Nash equilibria | MPI and PETSc | Micro–macro comparisons |
 
 > **Model scope:** The published model considers a single-lane traffic setting and does not explicitly impose microscopic collision-avoidance constraints. Multi-lane traffic and collision avoidance are possible future extensions.
+
+### 🚀 Interactive Demonstrations
+
+Explore the numerical methods directly in your browser using Binder.
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb)
 
 </details>
 
