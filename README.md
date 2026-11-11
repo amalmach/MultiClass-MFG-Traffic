@@ -149,12 +149,12 @@ At the microscopic level, vehicles are modeled as individual agents belonging to
 For vehicle \(i\) of class \(j\), its position evolves according to:
 
 $$
-\frac{d x_i^j(t)}{dt}=v_i^j(t),
+d x_i^j(t)=v_i^j(t) dt,
 $$
 
 where:
 
-- \(x_i^j(t)\) is the vehicle position.
+- $x_i^j(t)$ is the vehicle position.
 - \(v_i^j(t)\) is its velocity control.
 - \(j\) denotes the vehicle class.
 
