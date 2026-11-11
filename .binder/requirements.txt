@@ -1,0 +1,11 @@
+# Numerical computation
+numpy==2.2.4
+scipy==1.15.2
+
+# Scientific visualization
+matplotlib==3.10.0
+
+# Jupyter environment
+jupyterlab==4.3.4
+notebook==7.3.2
+ipykernel==6.29.5
