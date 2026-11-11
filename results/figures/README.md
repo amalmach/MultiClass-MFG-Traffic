@@ -78,10 +78,6 @@ traffic model.
 
 <br>
 
-**Model:** Single-class traffic flow.
-
-**Scientific context:** Initial conditions for macroscopic traffic simulations.
-
 **Reference:** [PhD thesis, Chapter II, Figure II.1](https://theses.hal.science/tel-05806256/document).
 
 </details>
@@ -122,12 +118,6 @@ two-class traffic: TC, CT, and TCT.
 
 <br>
 
-**Model:** Two-class heterogeneous traffic flow.
-
-**Vehicle classes:** Cars and trucks.
-
-**Scientific context:** Initial conditions for the GLWR, GS, and GNS numerical experiments.
-
 **References:** [PhD thesis, Chapter II, Figure II.2](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 1](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -155,10 +145,10 @@ under three different formulations:
 
 The results illustrate the evolution of:
 
-- Traffic density.
-- Optimal velocity.
-- Optimal cost.
-- Fundamental diagrams characterizing traffic flow behavior.
+- Traffic density $\rho$.
+- Optimal velocity $u$.
+- Optimal cost $V$.
+- Fundamental diagrams characterizing traffic flow behavior $q(\rho)=\rho u$.
 
 These comparisons help assess how different modeling assumptions influence
 the resulting traffic dynamics.
@@ -180,10 +170,6 @@ Separable, and Non-Separable models.
 
 <br>
 
-**Model:** Single-class macroscopic traffic flow.
-
-**Quantities:** Density, velocity, optimal cost, and fundamental diagrams.
-
 **References:** [PhD thesis, Chapter II, Figure II.3](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 8](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -199,18 +185,15 @@ Separable, and Non-Separable models.
 The **Generalized Lighthill–Whitham–Richards (GLWR)** model extends
 classical traffic flow modeling to heterogeneous vehicle populations.
 
-The simulations investigate the evolution of class-dependent traffic
-variables under three initial configurations:
-
-- **TC:** Cars initially in front.
-- **CT:** Trucks initially in front.
-- **TCT:** Interlaced traffic configuration.
+The simulations investigate heterogeneous traffic dynamics for the
+TC, CT, and TCT initial configurations.
 
 The numerical results illustrate the evolution of:
 
-- Class-dependent traffic densities.
-- Optimal velocity fields.
-- Optimal value functions.
+- Class-dependent traffic densities $\rho^1, \rho^2$.
+- Optimal velocity fields $u^1, u^2$.
+- Optimal value functions $V^1, V^2$.
+- Associated fundamental diagrams.
 
 The corresponding fundamental diagrams provide additional information
 about the relationship between traffic density and flow.
@@ -232,12 +215,6 @@ under the TC, CT, and TCT configurations.
 
 <br>
 
-**Model:** Generalized Lighthill–Whitham–Richards (GLWR).
-
-**Vehicle classes:** Cars and trucks.
-
-**Configurations:** TC, CT, and TCT.
-
 **References:** [PhD thesis, Chapter II, Figure II.4](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 2](https://doi.org/10.1016/j.trb.2025.103196).
 
@@ -258,9 +235,9 @@ TC, CT, and TCT initial configurations.
 
 The numerical results illustrate the evolution of:
 
-- Class-dependent traffic densities.
-- Optimal velocities.
-- Value functions.
+- Class-dependent traffic densities $\rho^1, \rho^2$.
+- Optimal velocity fields $u^1, u^2$.
+- Optimal value functions $V^1, V^2$.
 - Associated fundamental diagrams.
 
 These experiments demonstrate the behavior of the multi-class
@@ -282,10 +259,6 @@ Generalized Separable (GS) cost functional.
 </div>
 
 <br>
-
-**Model:** Generalized Separable (GS).
-
-**Configurations:** TC, CT, and TCT.
 
 **References:** [PhD thesis, Chapter II, Figure II.5](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 3](https://doi.org/10.1016/j.trb.2025.103196).
@@ -310,10 +283,10 @@ dynamics for the TC, CT, and TCT configurations.
 
 The figure presents the evolution of:
 
-- Class-dependent traffic densities.
-- Optimal velocity fields.
-- Value functions.
-- Fundamental diagrams.
+- Class-dependent traffic densities $\rho^1, \rho^2$.
+- Optimal velocity fields $u^1, u^2$.
+- Optimal value functions $V^1, V^2$.
+- Associated fundamental diagrams.
 
 These simulations complement the GS and GLWR experiments by
 examining a different cost structure.
@@ -334,10 +307,6 @@ Generalized Non-Separable (GNS) cost functional.
 </div>
 
 <br>
-
-**Model:** Generalized Non-Separable (GNS).
-
-**Configurations:** TC, CT, and TCT.
 
 **References:** [PhD thesis, Chapter II, Figure II.6](https://theses.hal.science/tel-05806256/document) ·
 [Research paper, Figure 4](https://doi.org/10.1016/j.trb.2025.103196).
