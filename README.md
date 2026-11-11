@@ -386,7 +386,7 @@ These issues motivate the investigation of advanced numerical methods and scalab
 ---
 
 <details>
-<summary><strong>📊 Numerical Results & Scientific Visualizations</strong></summary>
+<summary><h2>📊 Numerical Results & Scientific Visualizations</h2></summary>
 
 <br>
 
