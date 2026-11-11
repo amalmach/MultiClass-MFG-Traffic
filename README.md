@@ -124,7 +124,6 @@ The associated publication reports numerical investigations of nonlinear systems
 The computational methodology includes PETSc-based parallel implementations and MPI.
 
 **Scientific references:**
-
 - [Research Paper](https://doi.org/10.1016/j.trb.2025.103196)
 - [PhD Thesis — Chapter II](https://theses.hal.science/tel-05806256/document)
 
