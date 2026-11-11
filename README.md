@@ -27,15 +27,9 @@
 
 ### Research Motivation
 
-How can the collective behavior of heterogeneous traffic populations be modeled through individual strategic interactions?
+How can the collective behavior of heterogeneous traffic populations be modeled through individual strategic interactions? How accurately can macroscopic Mean-Field Game equilibria approximate the behavior of finite populations of vehicles? And how can the resulting nonlinear systems be solved efficiently at large computational scales?
 
-How accurately can macroscopic Mean-Field Game equilibria approximate the behavior of finite populations of vehicles?
-
-And how can the resulting nonlinear systems be solved efficiently at large computational scales?
-
-This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**.
-
-The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**.
+This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**.
 
 It establishes connections between:
 
