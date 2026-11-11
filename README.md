@@ -386,110 +386,23 @@ These issues motivate the investigation of advanced numerical methods and scalab
 ---
 
 <details>
-<summary><h2>📊 Numerical Results & Scientific Visualizations</h2></summary>
+<summary><strong>📊 Numerical Results & Scientific Visualizations</strong></summary>
 
 <br>
 
-The numerical investigations examine different traffic configurations, objective functionals, and computational methodologies.
+The numerical investigations explore **single-class and multi-class traffic dynamics** through macroscopic mean-field models and microscopic finite-player games.
 
-<details>
-<summary><strong>🚦 1. Traffic Scenarios</strong></summary>
+The experiments cover different traffic configurations and cost functionals (**LWR, GLWR, GS, and GNS**), together with the numerical assessment of **mean-field approximations, ε-Nash equilibria, and low-rank structures**.
 
-<br>
-
-Three initial configurations of cars and trucks are investigated.
-
-| Scenario | Configuration |
-|:---|:---|
-| **TC** | Segregated traffic configuration with trucks in front |
-| **CT** | Segregated traffic configuration with cars in front |
-| **TCT** | Interlaced configuration with alternating trucks and cars |
-
-The scenarios are combined with different traffic cost functionals to investigate interactions between vehicle populations.
-
-**References:**
-[Research paper, §4](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.5 and II.7](https://theses.hal.science/tel-05806256/document)
-
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🌊 2. Macroscopic Traffic Simulations</strong></summary>
-
-<br>
-
-### GLWR Model — Macroscopic Traffic Dynamics
-
-The following numerical results illustrate the macroscopic dynamics
-of heterogeneous traffic under the **Generalized Lighthill–Whitham–
-Richards (GLWR)** cost functional.
-
-The results illustrate the evolution of class-dependent traffic
-densities, optimal velocity fields, and value functions.
-
-<br>
+A complete gallery of the numerical results, including **12 scientific figures**, detailed descriptions, and references to the corresponding publications, is available below.
 
 <div align="center">
 
-<img src="results/figures/glwr_traffic_configurations.png"
-     alt="GLWR multi-class traffic simulation results"
-     width="850">
+### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
 
-<br>
-
-<sub>
-<b>Figure 1.</b> Macroscopic numerical results for the GLWR traffic
-model, corresponding to Figure II.4 of the PhD thesis.
-</sub>
+<sub>Traffic Configurations · Macroscopic Dynamics · Microscopic Simulations · Nash Equilibrium Accuracy · Low-Rank Analysis</sub>
 
 </div>
-
-<br>
-
-**References:**
-[Research paper, §4.1](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.7](https://theses.hal.science/tel-05806256/document)
-
-<br>
-
-📊 **[Explore the Scientific Figures Gallery](results/figures/README.md)**
-
-The gallery provides additional context, scientific references,
-and documentation for the numerical experiments.
-
-
-### Scientific Figures
-
-Figures illustrating these results will be progressively added to the repository.
-
-The objective is to provide high-quality, reproducible visualizations rather than screenshots alone.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🚗 3. Microscopic Dynamics and ε-Nash Investigations</strong></summary>
-
-<br>
-
-The microscopic experiments investigate:
-
-- Mean-field-constructed controls.
-- Microscopic best-response strategies.
-- Differences between individual cost functionals.
-- ε-Nash accuracy measures.
-- Effects of finite population size.
-
-These numerical experiments evaluate the consistency between microscopic and macroscopic traffic descriptions.
-
-**References:**
-[Research paper, §4.2](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.8](https://theses.hal.science/tel-05806256/document)
-
 
 </details>
 
