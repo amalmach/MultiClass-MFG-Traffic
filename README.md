@@ -227,7 +227,7 @@ The research investigates the relationship between:
 - Macroscopic Nash Mean-Field Game equilibria.
 - Vehicle-level controls reconstructed from the mean-field solution.
 
-Starting from an optimal macroscopic velocity field, microscopic controls are constructed through: $\widehat{v}_i^j(t) = u_j^*\left(t,x_i^j(t)\right).$
+Starting from an optimal macroscopic velocity field, microscopic controls are constructed through: $\widehat{v}_i^j(t) = u^{j,*}\left(t,x_i^j(t)\right).$
 
 The resulting strategies are compared with microscopic best-response controls.
 
@@ -263,7 +263,6 @@ The mathematical foundations include:
 Detailed assumptions, derivations, theoretical discussions, and supporting mathematical results are presented in the PhD thesis.
 
 **Further reading:**
-
 [PhD Thesis — Chapter II](https://theses.hal.science/tel-05806256/document)
 
 </details>
