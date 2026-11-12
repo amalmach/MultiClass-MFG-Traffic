@@ -8,6 +8,7 @@ Traffic Inputs for the General J-Class Mean-Field Game
 Based on:
     PhD thesis, Appendix D.1
     Listing D.10 — J-class traffic inputs
+    Listing D.11 — Initial density configuration
     Listing D.12 — Two-class initial densities
 
 Supported models:
