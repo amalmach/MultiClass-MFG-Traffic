@@ -130,7 +130,7 @@ The optimal control is
 <p align="center">
 $u_j^*
 =
-\operatorname{clip}
+\mathrm{clip}
 \left(
 u_{\max,j}
 (1-u_{\max,j}p_j),
