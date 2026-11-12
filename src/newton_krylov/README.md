@@ -93,7 +93,11 @@ The general multi-class implementation supports three models:
 
 ### 3.1. Generalized Lighthill–Whitham–Richards (GLWR)
 
-For vehicle class $j$, the desired velocity is $U_j(\boldsymbol{\rho}) = u_{\max,j} \left( 1- \sum_{m=1}^{J} \frac{\rho_m}{\rho_{\mathrm{jam},m}} \right),$
+For vehicle class $j$, the desired velocity is 
+
+<p align="center">
+$U_j(\boldsymbol{\rho}) = u_{\max,j} \left( 1- \sum_{m=1}^{J} \frac{\rho_m}{\rho_{\mathrm{jam},m}} \right),$
+</p>
 
 where:
 
@@ -101,14 +105,22 @@ where:
 - $\rho_{\mathrm{jam},m}$ is the jam density of class $m$.
 - $\rho_m$ is the density of class $m$.
 
-The running cost is $f_j(u_j,\boldsymbol{\rho}) = \frac{1}{2} \left( U_j(\boldsymbol{\rho})-u_j \right)^2.$
+The running cost is 
+
+<p align="center">
+$f_j(u_j,\boldsymbol{\rho}) = \frac{1}{2} \left( U_j(\boldsymbol{\rho})-u_j \right)^2.$
+</p>
 
 The optimal velocity is $u_j^* = U_j(\boldsymbol{\rho})-p_j,$
 
 where $p_j$ denotes the spatial derivative of the value function.
 
 The physical admissibility of the desired velocity depends on the
-combined normalized occupancy $\sum_{m=1}^{J} \frac{\rho_m}{\rho_{\mathrm{jam},m}} \leq 1.$
+combined normalized occupancy 
+
+<p align="center">
+$\sum_{m=1}^{J} \frac{\rho_m}{\rho_{\mathrm{jam},m}} \leq 1.$
+</p>
 
 Unlike GS and GNS, the implemented GLWR optimal control is not
 explicitly clipped to the interval $[0,u_{\max,j}]$.
@@ -172,7 +184,7 @@ The optimal velocity is
 <p align="center">
 $u_j^*
 =
-\operatorname{clip}
+\mathrm{clip}
 \left(
 u_{\max,j}
 \left[
