@@ -16,3 +16,6 @@ examples/one_class_demo/plots/
 # Temporary files
 *.log
 .virtual_documents/
+
+# Generated numerical results
+*.npz
