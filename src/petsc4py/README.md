@@ -1,160 +1,173 @@
-# ⚡ Parallel Mean-Field Game Solver — PETSc
+# Parallel Traffic Mean-Field Game Solvers — PETSc / MPI
 
-This directory contains a parallel numerical implementation for
-single-class traffic flow models formulated through Mean-Field Games.
+This directory contains PETSc-based implementations of traffic **Mean-Field Game (MFG)** models. It preserves the original **single-class HPC implementation** and adds a **general $J$-class PETSc/MPI reference solver** based on the parallel method described in Appendix D.2 of the PhD thesis.
 
-The computational framework combines:
 
-- **PETSc / petsc4py** for nonlinear and linear algebra.
-- **MPI / mpi4py** for distributed-memory parallel computing.
-- **Pyccel** for compiling performance-critical numerical functions.
-- **SLURM** for submitting simulations to HPC clusters.
+## Contents
 
----
+The `one_class/` model-specific sources are documented under:
 
-## 📁 Code Organization
+- `one_class/modules/modules_lwr/modules.py` — LWR model.
+- `one_class/modules/modules_separable/modules.py` — separable model.
+- `one_class/modules/modules_nonseparable/modules.py` — non-separable model.
 
-```text
-petsc4py/
-├── README.md
-├── options.txt
-│
-└── one_class/
-    ├── mfg_parallel_main.py
-    ├── tools.py
-    ├── batch.slurm
-    ├── ReadMe.md
-    │
-    └── modules/
-        ├── modules_lwr/
-        │   └── modules.py
-        ├── modules_separable/
-        │   └── modules.py
-        └── modules_nonseparable/
-            └── modules.py
+These paths are retained from the original documentation; verify the modules present in a particular checkout before attempting to compile or run the legacy driver.
+
+## 1. General $J$-class PETSc/MPI solver (`multi_class/`)
+
+### 1.1 Models
+
+The general implementation supports the same three cost models as the sequential solver:
+
+| Model | Name | Main property |
+| --- | --- | --- |
+| `GLWR` | Generalized Lighthill–Whitham–Richards | Density-dependent desired velocity |
+| `GS` | Generalized Separable | Separable density-dependent running cost |
+| `GNS` | Generalized Non-Separable | Density-dependent optimal velocity |
+
+For classes $j=1,\ldots,J$, the coupled numerical system contains conservation, optimality, and Hamilton–Jacobi equations with their initial and terminal conditions. With $N_x$ spatial cells and $N_t$ time steps, the total number of unknowns is $N=(3N_t+2)JN_x.$
+
+For the GS model, the bounded optimal control is $u_j^*=\mathrm{clip}\left(u_{\max,j}(1-u_{\max,j}p_j),\,0,\,u_{\max,j}\right).$
+
+For the GNS model, it is $u_j^*=\mathrm{clip}\left(u_{\max,j}\bigl(1-S(\boldsymbol{\rho})-u_{\max,j}p_j\bigr),\,0,\,u_{\max,j}\right),$
+
+where $S(\boldsymbol{\rho})$ is the model's normalized aggregate-density term. The precise discrete formulas, Jacobian entries, and indexing conventions are shared with the sequential implementation.
+
+### 1.2 Shared numerical code
+
+The parallel driver imports the mathematical implementation from [`../newton_krylov/multi_class/`](../newton_krylov/multi_class/), including:
+
+| Shared module | Role |
+| --- | --- |
+| `inputs.py` | Physical parameters, initial conditions, viscosity levels |
+| `cost_functions.py` | GLWR, GS, and GNS costs and derivatives |
+| `indx_funcs.py` | Global unknown indexing and solution reconstruction |
+| `newton_func.py` | Nonlinear MFG residual |
+| `jacobian_exact.py` | Sparse analytical Jacobian |
+| `multi_grid.py` | Grid-to-grid interpolation (used by the helper layer) |
+
+**Do not run `multi_class/main.py` outside this repository structure without adapting the shared-module import paths.** The present parallel driver solves one space–time grid; the sequential driver additionally supports multilevel grid refinement.
+
+### 1.3 PETSc/MPI architecture
+
+- **PETSc SNES** manages nonlinear Newton iterations and line search.
+- **PETSc KSP / PC** manages the Newton linear systems.
+- **MPI / mpi4py** distributes PETSc solution vectors and sparse matrix rows.
+- `parallel_functions.py` selects the residual and analytical Jacobian rows owned by each MPI rank.
+- **MUMPS** provides sparse direct LU factorization in the locally verified runs.
+
+**Current implementation limit:** Each rank first reconstructs the full global solution, evaluates the complete SciPy residual/Jacobian, and then extracts its owned rows for PETSc. Thus, PETSc's vector, matrix, and factorization operations are distributed, but nonlinear-system evaluation is *replicated*. This is a **correctness-oriented parallel reference implementation**, not a demonstrated scalable distributed-assembly algorithm. No speedup claims should be inferred from the small-grid timings below.
+
+### 1.4 Correspondence with PhD thesis Appendix D.2
+
+| Thesis listing | Subject | Repository implementation |
+| --- | --- | --- |
+| **D.15** | Input and numerical wrappers | `multi_class/parallel_functions.py` |
+| **D.16** | PETSc and MPI imports/initialization | `multi_class/main.py` |
+| **D.17** | PETSc/MPI nonlinear solver | `multi_class/main.py` |
+
+The files **adapt**, rather than reproduce verbatim, the appendix listings. In particular, they use PETSc ownership ranges and the shared general $J$-class numerical kernels; the initial version is single-grid and uses replicated residual/Jacobian evaluation. The thesis additionally describes the original parallel workflow and cluster-specific solver choices.
+
+## 2. Install and test locally (Ubuntu / Conda)
+
+A consistent PETSc/MPI installation is essential. From the repository root:
+
+```bash
+conda create -n traffic-petsc -c conda-forge --override-channels \
+    python=3.11 numpy scipy mpi4py openmpi petsc petsc4py -y
+conda activate traffic-petsc
 ```
 
----
+Check your active Python and MPI executables:
 
-## 📐 Mathematical Models
+```bash
+which python3
+which mpirun
+python3 -c "from mpi4py import MPI; from petsc4py import PETSc; print('PETSc:', PETSc.Sys.getVersion()); print('MPI size:', MPI.COMM_WORLD.Get_size())"
+mpirun -np 2 python3 src/petsc4py/multi_class/check_environment.py
+```
 
-Three single-class traffic formulations are implemented:
+### 2.1 Run the multi-class solver
 
-| Model | Source |
-|:---|:---|
-| LWR | [`modules/modules_lwr/modules.py`](one_class/modules/modules_lwr/modules.py) |
-| Separable | [`modules/modules_separable/modules.py`](one_class/modules/modules_separable/modules.py) |
-| Non-Separable | [`modules/modules_nonseparable/modules.py`](one_class/modules/modules_nonseparable/modules.py) |
+Run the commands below **from the repository root**, in the `traffic-petsc` environment. To test GLWR using two MPI processes:
 
-Each module includes numerical routines for evaluating the nonlinear
-system and constructing Jacobian entries.
+```bash
+mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
+    --J 3 --model GLWR --nx 5 --nt 8 \
+    --tol 1e-8 --max-it 50 \
+    --output petsc_J3_GLWR_MPI2.npz \
+    -ksp_type preonly -pc_type lu \
+    -pc_factor_mat_solver_type mumps \
+    -ksp_converged_reason -snes_converged_reason
+```
 
-The principal computational functions are:
+To run GS, change `--model GLWR` to `--model GS` and use a distinct output filename. For GNS with four ranks, the local test needed additional MUMPS workspace:
 
-- `compute_FF` — Nonlinear system residual.
-- `compute_jacobian` — Jacobian assembly data.
+```bash
+mpirun -np 4 python3 src/petsc4py/multi_class/main.py \
+    --J 3 --model GNS --nx 5 --nt 8 \
+    --tol 1e-8 --max-it 50 \
+    --output petsc_J3_GNS_MPI4.npz \
+    -ksp_type preonly -pc_type lu \
+    -pc_factor_mat_solver_type mumps \
+    -mat_mumps_icntl_14 200 \
+    -ksp_converged_reason -snes_converged_reason
+```
 
----
+### 2.2 Output format
 
-## ⚙️ Main Components
+When `--output` is set, the driver writes a compressed `.npz` file containing the global solution and reconstructed fields (`rho`, `u`, `V`, `Q`), grid coordinates, model parameters, and nonlinear residual norms. Reconstructed density storage is
+
+```text
+rho[class, space, time]  # shape (J, Nx, Nt+1)
+```
+
+For each class, discrete mass at time step $n$ is $M_j^n=\Delta x\sum_{k=1}^{N_x}\rho_{j,k}^n.$
+
+For the periodic conservation discretization, validation checks whether $M_j^n$ stays constant to numerical precision.
+
+The repository's `.gitignore` excludes `*.npz` simulation outputs so that generated results do not accidentally enter version control.
+
+
+## 3. Original single-class implementation (`one_class/`)
+
+The original PETSc/Pyccel code is preserved under [`one_class/`](one_class/). It includes:
 
 | File | Purpose |
-|:---|:---|
-| [`mfg_parallel_main.py`](one_class/mfg_parallel_main.py) | Main parallel simulation script |
-| [`tools.py`](one_class/tools.py) | Supporting numerical utilities |
-| [`batch.slurm`](one_class/batch.slurm) | SLURM job submission script |
-| `modules.py` | Model-specific numerical kernels compiled using Pyccel |
+| --- | --- |
+| [`mfg_parallel_main.py`](one_class/mfg_parallel_main.py) | Original parallel driver |
+| [`tools.py`](one_class/tools.py) | Original numerical utilities |
+| [`batch.slurm`](one_class/batch.slurm) | Original SLURM job configuration |
+| [`ReadMe.md`](one_class/ReadMe.md) | Original single-class notes |
+| `modules/.../modules.py` | Model-specific residual/Jacobian kernels described in original documentation |
 
----
+The original documented numerical kernels used **Pyccel**, with a compilation command such as:
 
-## 🖥️ Original HPC Configuration
+```bash
+pyccel modules.py
+```
 
-The original experiments used a SLURM-managed computing environment.
+The main legacy driver expects an importable model-specific `modules` implementation (`compute_FF`, `compute_jacobian`). **Selection, compilation, and import behavior have not been revalidated for a clean local install.** Consult [`one_class/ReadMe.md`](one_class/ReadMe.md) and the corresponding model sources for that workflow.
 
-The included `batch.slurm` requests:
+### 3.1 Historical SLURM/HPC workflow
 
-- One compute node.
-- 56 MPI tasks.
-- A high-memory partition.
-- A 30-hour time limit.
+The original `batch.slurm` configuration is documented as requesting one exclusive high-memory node, 56 MPI tasks, and a 30-hour time limit, with partition `himem` and QoS `himem-cpu`. Those settings were specific to the original cluster environment and must not be assumed valid elsewhere.
 
-The original job launches the simulation using:
+The documented launch command was:
 
 ```bash
 mpirun python mfg_parallel_main.py -snes_linesearch_type l2
 ```
 
-This command is provided as a reference to the original HPC workflow.
-It requires a compatible software environment and an importable,
-model-specific `modules` implementation.
+The batch script is intended for a compatible SLURM allocation, not a laptop shell. Its software environment includes cluster-specific compiler, Python, MPI, and solver modules. The original documentation also mentioned the historical script name `mfg_parallel_petsc_pyccel.py`; the source entry point in the present file listing is `mfg_parallel_main.py`.
 
----
+### 3.2 Historical PETSc source-build configuration
 
-## 🔧 Pyccel Compilation
-
-The numerical kernels are provided for three mathematical models:
-
-- LWR.
-- Separable.
-- Non-Separable.
-
-The original documentation indicates that Pyccel was used to compile
-the selected `modules.py` implementation.
-
-**Note:** The complete model-selection and compilation procedure
-has not yet been verified for a clean environment.
-
-Compilation and execution instructions will be updated after the
-model-loading procedure and software dependencies have been tested.
-
----
-
-# 🚀 Installation & Execution
-
-This section documents the PETSc installation procedure, execution commands,
-and solver configuration options associated with the original numerical
-implementation.
-
-The commands reflect the original research workflow and may require
-adaptation to the operating system, PETSc version, and available
-computational resources.
-
-<details>
-<summary><strong>📦 1. Download PETSc</strong></summary>
-
-<br>
-
-The original installation procedure obtains PETSc from its Git repository.
+The existing README documented a PETSc source build, including:
 
 ```bash
 git clone -b release https://gitlab.com/petsc/petsc.git petsc
-```
-
-Enter the PETSc source directory:
-
-```bash
 cd petsc
-```
-
-**Note:** The original `release` branch reference is preserved here.
-For reproducible installations, a specific compatible PETSc release
-should be selected and documented.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>⚙️ 2. Configure & Install PETSc</strong></summary>
-
-<br>
-
-The original configuration enables optimized compilation and several
-external numerical libraries.
-
-### PETSc Configuration
-
-```bash
 ./configure \
     --with-debugging=0 \
     --download-p4est=1 \
@@ -171,240 +184,33 @@ external numerical libraries.
     --with-petsc4py
 ```
 
-The configuration includes support for numerical libraries such as:
-
-| Library | Role |
-|:---|:---|
-| PETSc | Parallel numerical computing |
-| MUMPS | Sparse direct linear solvers |
-| METIS / ParMETIS | Graph partitioning |
-| HYPRE | Parallel preconditioning |
-| SuperLU / SuperLU_DIST | Sparse linear system solvers |
-| ScaLAPACK | Distributed linear algebra |
-| HDF5 | Scientific data storage |
-| p4est | Parallel mesh management |
-
-### Build PETSc
-
-The original build command is:
+Historical build command:
 
 ```bash
 make PETSC_DIR=/path/to/petsc PETSC_ARCH=arch-linux-c-opt all
 ```
 
-Replace `/path/to/petsc` with the actual PETSc installation directory.
-
-The value of `PETSC_ARCH` must correspond to the architecture
-configured during installation.
-
-### Python Bindings
-
-The original instructions also include:
-
-```bash
-python3 -m pip install --user -e .
-```
-
-**Important:** This command was part of the historical installation
-procedure. Its correct execution directory and compatibility with the
-selected PETSc/petsc4py version must be verified before use.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🔧 3. Compile Numerical Modules with Pyccel</strong></summary>
-
-<br>
-
-The implementation provides three model-specific numerical modules:
-
-| Mathematical Model | Source Directory |
-|:---|:---|
-| LWR | `one_class/modules/modules_lwr/` |
-| Separable | `one_class/modules/modules_separable/` |
-| Non-Separable | `one_class/modules/modules_nonseparable/` |
-
-Each directory contains a `modules.py` file implementing
-model-specific numerical functions.
-
-The original compilation command is:
-
-```bash
-pyccel modules.py
-```
-
-Pyccel is used to compile performance-critical numerical routines.
-
-The main script requires an importable `modules` implementation:
-
-```python
-from modules import compute_jacobian, compute_FF
-```
-
-**Note:** The exact procedure for selecting, compiling, and exposing
-a particular model-specific module to the main script remains to be
-verified for a clean installation.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>▶️ 4. Run the Parallel Simulation</strong></summary>
-
-<br>
-
-### Original Documented Command
-
-The historical README specified:
-
-```bash
-mpirun -n 2 python mfg_parallel_petsc_pyccel.py -pc_factor_mat_solver_type mumps
-```
-
-This command is preserved for reference.
-
-However, the current repository contains the main script:
-
-```text
-one_class/mfg_parallel_main.py
-```
-
-The filename used in the original documentation differs from the
-current source file.
-
-### Current Source Entry Point
-
-The included SLURM script launches:
-
-```bash
-mpirun python mfg_parallel_main.py -snes_linesearch_type l2
-```
-
-This is the execution command used in the repository's
-`one_class/batch.slurm` file.
-
-The program requires:
-
-- An appropriate PETSc and petsc4py installation.
-- MPI and mpi4py.
-- A compatible model-specific numerical module.
-- Access to the required numerical libraries.
-
-The execution procedure must be tested in a compatible environment
-before being treated as a verified reproduction command.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🖥️ 5. HPC Execution with SLURM</strong></summary>
-
-<br>
-
-The repository includes a SLURM submission script:
-
-[`one_class/batch.slurm`](one_class/batch.slurm)
-
-The original configuration uses:
-
-| Parameter | Configuration |
-|:---|:---|
-| Partition | `himem` |
-| Quality of service | `himem-cpu` |
-| Nodes | 1 |
-| MPI tasks | 56 |
-| Memory | All available memory on the allocated node |
-| Time limit | 30 hours |
-| Resource allocation | Exclusive node |
-
-The original submission command is:
-
-```bash
-sbatch batch.slurm
-```
-
-This command must be executed from a suitable directory on
-a SLURM-managed HPC system.
-
-The script loads environment-specific modules, including
-MUMPS, Python, OpenMPI, and compiler tools.
-
-**Note:** Partition names, available libraries, and resource limits
-are cluster-dependent. The provided configuration reflects
-the original computing environment.
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🛠️ 6. Optional PETSc Solver Options</strong></summary>
-
-<br>
-
-PETSc provides runtime options for controlling nonlinear solvers,
-linear solvers, convergence monitoring, and error handling.
-
-The following options were documented in the original implementation.
-
-| Option | Description |
-|:---|:---|
-| `-snes_linesearch_type l2` | Use an L2-norm-based nonlinear line search |
-| `-snes_lag_jacobian -2` | Reuse the Jacobian according to PETSc's lagging configuration |
-| `-ksp_rmonitor` | Residual monitoring option from the original documentation |
-| `-snes_monitor` | Display nonlinear solver convergence |
-| `-snes_converged_reason` | Display the SNES convergence or divergence reason |
-| `-ksp_converged_reason` | Display the KSP convergence or divergence reason |
-| `-ksp_error_if_not_converged` | Raise an error when the linear solver does not converge |
-
-### Example: Monitor Nonlinear Convergence
-
-```bash
-mpirun -n 2 python mfg_parallel_main.py \
-    -snes_monitor \
-    -snes_converged_reason
-```
-
-### Example: Monitor Linear Convergence
-
-```bash
-mpirun -n 2 python mfg_parallel_main.py \
-    -ksp_monitor \
-    -ksp_converged_reason
-```
-
-### Example: MUMPS Direct Solver
-
-```bash
-mpirun -n 2 python mfg_parallel_main.py \
-    -pc_factor_mat_solver_type mumps
-```
-
-These examples demonstrate PETSc option syntax and assume that
-the execution environment and model-specific module are correctly
-configured.
-
-Some options depend on PETSc version and solver configuration.
-For example, the historical `-ksp_rmonitor` option should be checked
-against the selected PETSc release.
-
-</details>
+These commands are retained for provenance. They are **not** the verified installation route for the new multi-class solver. PETSc configuration options and `PETSC_ARCH` depend on the selected release and system. For local reproduction of the new code, use the Conda instructions in Section 2.
+
+### 3.3 Useful PETSc runtime options
+
+| Option | Purpose |
+| --- | --- |
+| `-snes_monitor` | Show nonlinear convergence |
+| `-snes_converged_reason` | Show nonlinear stopping reason |
+| `-snes_linesearch_type l2` | Use PETSc's L2 nonlinear line search |
+| `-ksp_monitor` | Show linear solver convergence |
+| `-ksp_converged_reason` | Show linear stopping reason |
+| `-ksp_error_if_not_converged` | Raise an error when KSP fails |
+| `-ksp_type preonly -pc_type lu` | Direct LU preconditioner/solve configuration |
+| `-pc_factor_mat_solver_type mumps` | Select MUMPS when supported by PETSc |
+| `-pc_factor_mat_solver_type superlu_dist` | Select SuperLU_DIST when supported by PETSc |
+
+## 5. References
+
+1. **A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami (2025).** “Computational investigations of a multi-class traffic flow model: mean-field and microscopic dynamics.” *Transportation Research Part B: Methodological*, **195**, 103196. [DOI](https://doi.org/10.1016/j.trb.2025.103196).
+2. **A. Machtalay (2026).** *Micro–macro modeling and scalable numerical methods for high-dimensional mean-field and control systems: structure-exploiting solvers and low-rank techniques.* PhD thesis. See **Appendix D.1** (sequential Newton–GMRES) and **Appendix D.2** (parallel PETSc/MPI, Listings D.15–D.17). [Thesis PDF](https://theses.hal.science/tel-05806256/document).
 
 ---
 
-## 📚 Scientific References
-
-**Research paper:**  
-[Computational investigations of a multi-class traffic flow model:
-mean-field and microscopic dynamics](https://doi.org/10.1016/j.trb.2025.103196)
-
-**PhD thesis:**  
-[Chapter II — Numerical methods and computational investigations](https://theses.hal.science/tel-05806256/document)
-
----
-
-[⬅ Back to Source Code Documentation](../README.md)
+[← Back to source-code documentation](../README.md)

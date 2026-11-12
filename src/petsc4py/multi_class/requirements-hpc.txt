@@ -1,0 +1,19 @@
+# General J-class traffic MFG — PETSc/MPI implementation
+#
+# Intended for an HPC environment with a compatible
+# PETSc + MPI installation.
+#
+# Required Python packages:
+# numpy
+# scipy
+# mpi4py
+# petsc4py
+#
+# PETSc must be built with support for the selected
+# MPI implementation and linear solver configuration.
+#
+# Optional:
+# SuperLU_DIST for distributed sparse LU factorization.
+#
+# Package versions and cluster-specific module commands
+# should be recorded from the actual HPC environment.
