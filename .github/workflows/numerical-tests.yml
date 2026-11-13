@@ -1,0 +1,45 @@
+name: Numerical Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  numerical-tests:
+    name: Core Numerical Tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy pytest
+
+      - name: Run numerical tests
+        run: |
+          python -m pytest \
+            tests/test_indexing.py \
+            tests/test_cost_functions.py \
+            tests/test_jacobian.py \
+            tests/test_mass_conservation.py \
+            tests/test_sequential_solver.py \
+            -v --tb=short
