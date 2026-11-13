@@ -23,12 +23,6 @@ Important:
     routines assemble the complete system, after which
     locally owned rows are selected.
 
-    The next development stage will connect these helpers
-    to PETSc SNES and distributed MPI vectors.
-
-    Fully distributed, scalable row assembly is a
-    separate optimization step.
-
 No direct PETSc or mpi4py imports are required here.
 """
 
