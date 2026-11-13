@@ -61,23 +61,6 @@ python3 -m pytest \
 
 The PETSc integration tests launch MPI processes internally. Run pytest normally rather than through `mpirun`.
 
-## Test Configuration
-
-The solver integration tests use a three-class configuration with:
-
-| Parameter | Value |
-|:---|:---:|
-| Vehicle classes | 3 |
-| Spatial cells | 5 |
-| Time steps | 8 |
-| Unknowns | 390 |
-
-The MPI consistency tests compare solutions obtained with 1, 2, and 4 processes.
-
-The tests check numerical residuals, conservation of mass, physical constraints, and agreement between independent implementations.
-
-These tests establish numerical consistency for the specified configurations. They are not parallel scalability benchmarks.
-
 ---
 
 [Back to the main repository](../README.md)
