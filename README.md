@@ -83,7 +83,7 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     -pc_factor_mat_solver_type mumps
 ```
 
-See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. The general $J$-class PETSc implementation currently evaluates the full residual and Jacobian on each MPI process; its distributed execution has been checked on small problems but is not optimized for strong scaling.
+See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. 
 
 ## Numerical verification
 
