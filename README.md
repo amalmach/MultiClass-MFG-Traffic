@@ -66,19 +66,7 @@ Investigation of three families of cost functionals:
 
 These models allow the investigation of different traffic behaviors and interactions between vehicle populations.
 
-### 3. Large-Scale Numerical Algorithms
-
-Development and investigation of computational methodologies combining:
-
-- Space–time finite difference discretization.
-- Newton-type nonlinear iterations.
-- Newton–Krylov methods.
-- LGMRES iterative solvers.
-- Regularization-continuation techniques.
-- Preconditioning and initialization strategies.
-- Parallel computing.
-
-### 4. Investigation of Different Initial Traffic Configurations
+### 3. Investigation of Different Initial Traffic Configurations
 
 Systematic numerical investigation of three distinct initial spatial configurations of cars and trucks to analyze the influence of vehicle-class distributions on multi-class traffic dynamics.
 
@@ -91,6 +79,18 @@ The three configurations considered are:
 | **TCT — Trucks–Cars–Trucks** | Interlaced configuration with alternating groups of trucks and cars. |
 
 These configurations are investigated under different traffic cost functionals (**GLWR, GS, and GNS**).
+
+### 4. Large-Scale Numerical Algorithms
+
+Development and investigation of computational methodologies combining:
+
+- Space–time finite difference discretization.
+- Newton-type nonlinear iterations.
+- Newton–Krylov methods.
+- LGMRES iterative solvers.
+- Regularization-continuation techniques.
+- Preconditioning and initialization strategies.
+- Parallel computing.
 
 ### 5. Multi-Class Numerical Simulations
 
