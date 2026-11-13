@@ -13,7 +13,10 @@ This repository accompanies research on game-theoretic traffic modeling with het
 [![Research Paper](https://img.shields.io/badge/Research_Paper-Elsevier-0B7285?style=for-the-badge)](https://doi.org/10.1016/j.trb.2025.103196)
 [![arXiv](https://img.shields.io/badge/Preprint-arXiv-B31B1B?style=for-the-badge)](https://arxiv.org/abs/2306.13543)
 [![PhD Thesis](https://img.shields.io/badge/PhD_Thesis-HAL-6F42C1?style=for-the-badge)](https://theses.hal.science/tel-05806256/document)
+<br>
 
+[![Numerical Tests](https://github.com/amalmach/MultiClass-MFG-Traffic/actions/workflows/numerical-tests.yml/badge.svg)](https://github.com/amalmach/MultiClass-MFG-Traffic/actions/workflows/numerical-tests.yml)
+[![PETSc MPI Tests](https://github.com/amalmach/MultiClass-MFG-Traffic/actions/workflows/petsc-tests.yml/badge.svg)](https://github.com/amalmach/MultiClass-MFG-Traffic/actions/workflows/petsc-tests.yml)
 <br>
 
 </div>
