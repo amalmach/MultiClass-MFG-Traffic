@@ -286,14 +286,6 @@ It includes three model-specific numerical modules:
 
 The numerical modules use Pyccel for compiling selected computational routines.
 
-The original documentation specifies the following compilation command, executed in the directory containing the selected `modules.py`:
-
-```bash
-pyccel modules.py
-```
-
-The corresponding compiled module must be available on the Python import path used by the simulation driver.
-
 Consult the [single-class documentation](one_class/ReadMe.md) for the original workflow.
 
 ### SLURM Execution
