@@ -43,6 +43,13 @@ No local installation is required.
 The [Jupyter notebook](notebooks/interactive_multi_class_demo.ipynb)
 is also available for users who wish to inspect or modify the Python code.
 
+> **Computational resources:** Binder provides limited CPU and memory resources.
+> Large spatial or temporal grids and multiple refinement levels may
+> require substantial computation time or exceed the available memory.
+> We recommend starting with small grids and increasing the resolution
+> progressively. For large-scale experiments, run the solver locally
+> or on an HPC system.
+
 ---
 
 ### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
