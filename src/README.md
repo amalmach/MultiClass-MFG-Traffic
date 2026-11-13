@@ -62,15 +62,16 @@ python3 src/newton_krylov/multi_class/main.py \
 
 Requires PETSc, MPI, `petsc4py`, and `mpi4py`, with MUMPS support.
 
+The solver uses PETSc SNES for nonlinear iterations and MUMPS for sparse direct factorization of the Newton linear systems.
+
 ```bash
 mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     --J 3 --model GLWR --nx 5 --nt 8 \
-    --output petsc_J3_GLWR_MPI2.npz \
-    -ksp_type preonly \
-    -pc_type lu \
-    -pc_factor_mat_solver_type mumps
+    --tol 1e-8 \
+    --output petsc_J3_GLWR_MPI2.npz
 ```
 
+The linear solver configuration can be modified through PETSc command-line options.
 For installation requirements, model parameters, and additional execution options, consult the corresponding solver documentation:
 
 - [Newton–Krylov documentation](newton_krylov/README.md)
