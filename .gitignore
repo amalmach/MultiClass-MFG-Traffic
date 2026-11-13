@@ -19,3 +19,9 @@ examples/one_class_demo/plots/
 
 # Generated numerical results
 *.npz
+
+# Testing
+.pytest_cache/
+
+# Documentation backups
+*.backup
