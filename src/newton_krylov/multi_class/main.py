@@ -220,17 +220,40 @@ def compute_grid(T, L, Nx, Nt_requested, u_max, mu, CFL, EPS,
 # 3. Solve the J-class traffic MFG system
 # ============================================================
 
-def run_solver(args):
-    """Execute the sequential Newton-GMRES grid loop."""
+def run_solver(args, parameters=None):
+    """
+    Execute the sequential Newton-GMRES grid loop.
+
+    Parameters
+    ----------
+    args : argparse.Namespace
+        Numerical solver options.
+
+    parameters : dict, optional
+        Physical and numerical model configuration.
+        If omitted, the default configuration is used.
+    """
 
     # --------------------------------------------------------
     # Load physical and numerical inputs
     # --------------------------------------------------------
 
-    parameters = get_inputs(
-        J=args.J,
-        model=args.model,
-    )
+    if parameters is None:
+        parameters = get_inputs(
+            J=args.J,
+            model=args.model,
+        )
+
+    if parameters["J"] != args.J:
+        raise ValueError(
+            "The number of classes in parameters "
+            "must match args.J."
+        )
+
+    if parameters["model"] != args.model:
+        raise ValueError(
+            "The model in parameters must match args.model."
+        )
 
     print_inputs(parameters)
 

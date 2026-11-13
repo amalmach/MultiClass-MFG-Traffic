@@ -12,6 +12,7 @@ venv/
 # Generated demonstration results
 examples/one_class_demo/*.npz
 examples/one_class_demo/plots/
+examples/multi_class_demo/plots/
 
 # Temporary files
 *.log
