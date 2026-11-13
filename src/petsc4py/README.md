@@ -301,7 +301,7 @@ The supplied configuration requests:
 | Time limit | 30 hours |
 | Node allocation | Exclusive |
 
-The script launches the simulation using:
+Launche the simulation using:
 
 ```bash
 mpirun python mfg_parallel_main.py -snes_linesearch_type l2
