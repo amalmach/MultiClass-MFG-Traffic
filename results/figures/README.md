@@ -116,13 +116,6 @@ The simulations examine heterogeneous vehicle populations under the TC, CT, and 
      alt="Generalized Separable macroscopic traffic dynamics"
      width="900">
 
-<br>
-
-<sub>
-<b>Figure II.5.</b> Macroscopic traffic simulations under the
-Generalized Separable (GS) cost functional.
-</sub>
-
 </div>
 
 <br>
@@ -146,13 +139,6 @@ The figure presents class-dependent density, velocity, and value-function evolut
 <img src="gns_macroscopic_dynamics.png"
      alt="Generalized Non-Separable macroscopic traffic dynamics"
      width="900">
-
-<br>
-
-<sub>
-<b>Figure II.6.</b> Macroscopic traffic simulations under the
-Generalized Non-Separable (GNS) cost functional.
-</sub>
 
 </div>
 
@@ -182,13 +168,6 @@ The microscopic experiments compare strategies derived from mean-field equilibri
      alt="Microscopic strategy comparison for the single-class traffic model"
      width="900">
 
-<br>
-
-<sub>
-<b>Figure II.7.</b> Comparison between mean-field-derived
-strategies and finite-player best responses for one-class traffic.
-</sub>
-
 </div>
 
 <br>
@@ -212,13 +191,6 @@ The analysis includes the corresponding individual costs.
 <img src="two_class_microscopic_comparison.png"
      alt="Two-class microscopic traffic comparison under GS and GNS models"
      width="900">
-
-<br>
-
-<sub>
-<b>Figure II.9.</b> Microscopic traffic comparisons for
-heterogeneous two-class systems under GS and GNS cost functionals.
-</sub>
 
 </div>
 
@@ -244,13 +216,6 @@ The experiments consider the Generalized Separable and Generalized Non-Separable
 <img src="two_class_optimal_controls.png"
      alt="Comparison of mean-field optimal controls and microscopic best responses"
      width="900">
-
-<br>
-
-<sub>
-<b>Figure II.10.</b> Comparison of macroscopic mean-field
-equilibrium controls and microscopic best-response controls.
-</sub>
 
 </div>
 
@@ -279,13 +244,6 @@ These experiments investigate the accuracy of mean-field equilibrium strategies 
      alt="Nash equilibrium approximation accuracy for one-class traffic"
      width="900">
 
-<br>
-
-<sub>
-<b>Figure II.8.</b> Mean and maximum approximation errors
-and log–log convergence analysis for one-class traffic.
-</sub>
-
 </div>
 
 <br>
@@ -311,13 +269,6 @@ The results include log–log representations of the approximation errors as the
 <img src="two_class_nash_accuracy.png"
      alt="Nash approximation accuracy and convergence for two-class traffic"
      width="900">
-
-<br>
-
-<sub>
-<b>Figure II.11.</b> Mean and maximum approximation errors
-and log–log convergence analysis for heterogeneous two-class traffic.
-</sub>
 
 </div>
 
@@ -345,13 +296,6 @@ The numerical results examine the accuracy of multi-class mean-field equilibrium
 <img src="singular_value_decay.png"
      alt="Singular-value decay of traffic density, velocity, and optimal-cost matrices"
      width="900">
-
-<br>
-
-<sub>
-<b>Figure II.12.</b> Normalized singular-value decay for
-density, velocity, and optimal-cost matrices.
-</sub>
 
 </div>
 
