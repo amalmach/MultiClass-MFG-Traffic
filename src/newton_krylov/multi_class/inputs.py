@@ -156,9 +156,6 @@ def get_inputs(J=2, model="GLWR"):
     l_total = float(np.sum(l_list))
 
     # Common spatial domain for the numerical problem.
-    #
-    # Listing D.10 defines L_total but does not establish
-    # a complete general-J domain construction rule.
     # Here we use L_total as the road length.
 
     L = L_total
