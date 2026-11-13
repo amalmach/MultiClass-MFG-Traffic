@@ -66,9 +66,6 @@ The macroscopic simulations describe the evolution of traffic density, optimal v
 <img src="one_class_macroscopic_dynamics.png"
      width="900">
 
-<br>
-
-
 </div>
 
 <br>
@@ -93,8 +90,6 @@ The figure compares traffic densities, optimal velocities, value functions, and 
 <img src="glwr_traffic_configurations.png"
      alt="GLWR macroscopic traffic dynamics for TC, CT, and TCT configurations"
      width="900">
-
-<br>
 
 </div>
 
