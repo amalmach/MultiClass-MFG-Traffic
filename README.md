@@ -116,6 +116,29 @@ The solver supports the GLWR, GS, and GNS formulations. The number of vehicle cl
 
 For installation instructions and additional options, see the [PETSc/MPI documentation](src/petsc4py/README.md).
 
+---
+
+## Numerical Verification
+
+The numerical implementations are verified through automated tests covering:
+
+- Cost functions and analytical derivatives.
+- Sparse Jacobian consistency.
+- Conservation of vehicle density.
+- Convergence of sequential and parallel solvers.
+- Agreement between Newton–GMRES and PETSc/MPI solutions.
+- Numerical consistency across different MPI process counts.
+
+Run the test suite with:
+
+```bash
+python3 -m pytest tests/
+```
+
+See the [numerical testing documentation](tests/README.md) for requirements and additional information.
+
+---
+
 ## References
 
 ### Journal Article
