@@ -21,6 +21,29 @@ This repository accompanies research on game-theoretic traffic modeling with het
 
 </div>
 
+---
+
+## Interactive Traffic MFG Simulator
+
+Explore multi-class traffic Mean-Field Games through an interactive
+numerical simulator.
+
+Select the traffic model (GLWR, GS, or GNS), vehicle classes, initial
+density configuration, and numerical parameters. Run simulations and
+visualize traffic density, velocity, flux, value functions, and
+mass conservation.
+
+[![Launch Interactive Simulator](https://img.shields.io/badge/Launch-Interactive_Simulator-2E8B57?style=for-the-badge)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?urlpath=voila%2Frender%2Fnotebooks%2Finteractive_multi_class_demo.ipynb)
+
+![Interactive Multi-Class Traffic MFG Simulator](docs/images/interactive_simulator.png)
+
+The simulator runs in the browser using Binder and Voilà.
+No local installation is required.
+
+The [Jupyter notebook](notebooks/interactive_multi_class_demo.ipynb)
+is also available for users who wish to inspect or modify the Python code.
+
+---
 
 ### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
 
