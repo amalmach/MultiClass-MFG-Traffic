@@ -25,33 +25,6 @@ Initial density distribution for the single-class traffic model.
 
 **Source:** PhD thesis, Figure II.1.
 
-
-This figure illustrates the initial density distribution used in the
-single-class traffic model, considering a population of cars.
-
-The initial configuration establishes the starting conditions for
-investigating traffic evolution under different mathematical models
-and cost functionals.
-
-<div align="center">
-
-<img src="one_class_initial_density.png"
-     alt="Initial density distribution for the one-class traffic model"
-     width="850">
-
-<br>
-
-<sub>
-<b>Figure II.1.</b> Initial density distribution for the single-class
-traffic model.
-</sub>
-
-</div>
-
-<br>
-
-**Reference:** [PhD thesis, Chapter II, Figure II.1](https://theses.hal.science/tel-05806256/document).
-
 </details>
 
 <br>
@@ -61,37 +34,19 @@ traffic model.
 
 <br>
 
-This figure presents three initial density configurations for heterogeneous
-traffic composed of **cars and trucks**.
+![Two-class initial traffic configurations](two_class_initial_configurations.png)
 
-The configurations are:
+Initial density distributions for heterogeneous traffic composed of cars and trucks.
 
-- **TC:** Trucks followed by cars, with cars initially in front.
-- **CT:** Cars followed by trucks, with trucks initially in front.
-- **TCT:** An interlaced configuration involving alternating groups of trucks and cars.
+Three spatial configurations are considered:
 
-These configurations are used to investigate how the spatial distribution
-of vehicle classes influences collective traffic dynamics.
+- **TC:** Trucks–Cars.
+- **CT:** Cars–Trucks.
+- **TCT:** Trucks–Cars–Trucks.
 
-<div align="center">
+These configurations are used to investigate the influence of the initial spatial arrangement on traffic dynamics.
 
-<img src="two_class_initial_configurations.png"
-     alt="Initial traffic configurations TC, CT, and TCT for cars and trucks"
-     width="850">
-
-<br>
-
-<sub>
-<b>Figure II.2.</b> Initial density configurations for heterogeneous
-two-class traffic: TC, CT, and TCT.
-</sub>
-
-</div>
-
-<br>
-
-**References:** [PhD thesis, Chapter II, Figure II.2](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 1](https://doi.org/10.1016/j.trb.2025.103196).
+**Sources:** PhD thesis, Figure II.2; research article, Figure 1.
 
 </details>
 
