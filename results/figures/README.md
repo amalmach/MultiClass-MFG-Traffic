@@ -54,14 +54,20 @@ These configurations are used to investigate the influence of the initial spatia
 
 # 🌊 2. Macroscopic Traffic Simulations
 
-The macroscopic numerical experiments investigate the evolution of traffic
-densities, optimal velocities, and value functions under different traffic
-flow models and cost functionals.
+The macroscopic simulations describe the evolution of traffic density, optimal velocity, and value functions under different traffic cost formulations.
 
 <details>
 <summary><strong>📌 Figure II.3 — One-Class Macroscopic Traffic Dynamics</strong></summary>
 
 <br>
+![Single-class macroscopic traffic dynamics](one_class_macroscopic_dynamics.png)
+
+Macroscopic numerical results for the single-class LWR, Separable, and Non-Separable models.
+
+The figure compares traffic densities, optimal velocities, value functions, and fundamental diagrams.
+
+**Sources:** PhD thesis, Figure II.3; research article, Figure 8.
+
 
 This figure presents numerical simulations for the single-class traffic model
 under three different formulations:
