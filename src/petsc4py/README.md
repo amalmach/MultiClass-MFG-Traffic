@@ -8,12 +8,13 @@ The implementations cover single-class traffic models and general multi-class sy
 
 The numerical framework combines finite-difference discretization, Newton-type nonlinear solvers, sparse Jacobian assembly, and parallel linear algebra.
 
-</div>
-
 | Directory | Description |
 |:---|:---|
 | [`one_class/`](one_class/) | Single-class PETSc/MPI implementation |
 | [`multi_class/`](multi_class/) | General $J$-class PETSc/MPI solver |
+
+</div>
+
 
 ## General Multi-Class Solver
 
