@@ -93,22 +93,6 @@ The figure compares traffic densities, optimal velocities, value functions, and 
 
 <br>
 
-The **Generalized Lighthill–Whitham–Richards (GLWR)** model extends
-classical traffic flow modeling to heterogeneous vehicle populations.
-
-The simulations investigate heterogeneous traffic dynamics for the
-TC, CT, and TCT initial configurations.
-
-The numerical results illustrate the evolution of:
-
-- Class-dependent traffic densities $\rho^1, \rho^2$.
-- Optimal velocity fields $u^1, u^2$.
-- Optimal value functions $V^1, V^2$.
-- Associated fundamental diagrams.
-
-The corresponding fundamental diagrams provide additional information
-about the relationship between traffic density and flow.
-
 <div align="center">
 
 <img src="glwr_traffic_configurations.png"
@@ -126,8 +110,11 @@ under the TC, CT, and TCT configurations.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.4](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 2](https://doi.org/10.1016/j.trb.2025.103196).
+Macroscopic traffic dynamics for the Generalized Lighthill–Whitham–Richards (GLWR) model.
+
+The simulations examine heterogeneous vehicle populations under the TC, CT, and TCT initial configurations.
+
+**Sources:** PhD thesis, Figure II.4; research article, Figure 2.
 
 </details>
 
@@ -137,22 +124,6 @@ under the TC, CT, and TCT configurations.
 <summary><strong>📌 Figure II.5 — Generalized Separable (GS) Model</strong></summary>
 
 <br>
-
-This figure presents macroscopic numerical simulations for the
-**Generalized Separable (GS)** cost functional.
-
-The simulations investigate heterogeneous traffic dynamics for the
-TC, CT, and TCT initial configurations.
-
-The numerical results illustrate the evolution of:
-
-- Class-dependent traffic densities $\rho^1, \rho^2$.
-- Optimal velocity fields $u^1, u^2$.
-- Optimal value functions $V^1, V^2$.
-- Associated fundamental diagrams.
-
-These experiments demonstrate the behavior of the multi-class
-mean-field model under a separable cost structure.
 
 <div align="center">
 
@@ -171,9 +142,11 @@ Generalized Separable (GS) cost functional.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.5](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 3](https://doi.org/10.1016/j.trb.2025.103196).
+Macroscopic numerical results for the Generalized Separable (GS) traffic model.
 
+The figure presents class-dependent density, velocity, and value-function evolution for different initial traffic configurations.
+
+**Sources:** PhD thesis, Figure II.5; research article, Figure 3.
 </details>
 
 <br>
@@ -182,25 +155,6 @@ Generalized Separable (GS) cost functional.
 <summary><strong>📌 Figure II.6 — Generalized Non-Separable (GNS) Model</strong></summary>
 
 <br>
-
-This figure illustrates macroscopic traffic dynamics under the
-**Generalized Non-Separable (GNS)** cost functional.
-
-Unlike the separable formulation, this model incorporates a
-non-separable dependence within the optimization structure.
-
-The numerical experiments investigate the resulting traffic
-dynamics for the TC, CT, and TCT configurations.
-
-The figure presents the evolution of:
-
-- Class-dependent traffic densities $\rho^1, \rho^2$.
-- Optimal velocity fields $u^1, u^2$.
-- Optimal value functions $V^1, V^2$.
-- Associated fundamental diagrams.
-
-These simulations complement the GS and GLWR experiments by
-examining a different cost structure.
 
 <div align="center">
 
@@ -219,41 +173,23 @@ Generalized Non-Separable (GNS) cost functional.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.6](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 4](https://doi.org/10.1016/j.trb.2025.103196).
+Macroscopic numerical results for the Generalized Non-Separable (GNS) traffic model.
 
+The simulations illustrate the influence of non-separable congestion-dependent costs on heterogeneous traffic dynamics.
+
+**Sources:** PhD thesis, Figure II.6; research article, Figure 4.
 </details>
 
 ---
 
 # 🚘 3. Microscopic Traffic Simulations
 
-The microscopic experiments investigate finite-player traffic games
-and their relationship with the corresponding macroscopic
-mean-field formulations.
-
-The comparisons provide numerical evidence concerning the
-approximation of finite-player strategies by mean-field equilibria.
+The microscopic experiments compare strategies derived from mean-field equilibria with best-response strategies in finite-player traffic games.
 
 <details>
 <summary><strong>📌 Figure II.7 — One-Class Microscopic Strategy Comparison</strong></summary>
 
 <br>
-
-This figure compares microscopic traffic strategies obtained from
-the macroscopic mean-field formulation with finite-player
-best-response strategies.
-
-The experiments consider the single-class traffic model.
-
-The comparisons focus on the relationship between:
-
-- Mean-field-derived controls $\hat{v}$.
-- Finite-player best-response strategies $\bar{v}$.
-- Associated individual costs $J_{\hat{v}}, J_{\bar{v}}$.
-
-These results support the numerical investigation of the
-connection between mean-field equilibria and finite-player games.
 
 <div align="center">
 
@@ -272,9 +208,11 @@ strategies and finite-player best responses for one-class traffic.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.7](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 9](https://doi.org/10.1016/j.trb.2025.103196).
+Comparison of mean-field-derived controls and finite-player best-response strategies for the single-class traffic model.
 
+The analysis includes the corresponding individual costs.
+
+**Sources:** PhD thesis, Figure II.7; research article, Figure 9.
 </details>
 
 <br>
@@ -283,21 +221,6 @@ strategies and finite-player best responses for one-class traffic.
 <summary><strong>📌 Figure II.9 — Two-Class Microscopic Strategy Comparison</strong></summary>
 
 <br>
-
-This figure investigates microscopic traffic behavior for
-heterogeneous populations of cars and trucks.
-
-The experiments compare finite-player costs with the strategies
-obtained from the mean-field formulation.
-
-The analysis considers:
-
-- Generalized Separable (GS) cost functional.
-- Generalized Non-Separable (GNS) cost functional.
-- TC, CT, and TCT initial traffic configurations.
-
-The numerical comparisons help assess the relationship between
-multi-class mean-field equilibria and finite-player game dynamics.
 
 <div align="center">
 
@@ -316,8 +239,11 @@ heterogeneous two-class systems under GS and GNS cost functionals.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.9](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 5](https://doi.org/10.1016/j.trb.2025.103196).
+Microscopic comparisons for heterogeneous populations of cars and trucks.
+
+The experiments consider the Generalized Separable and Generalized Non-Separable models under different initial traffic configurations.
+
+**Sources:** PhD thesis, Figure II.9; research article, Figure 5.
 
 </details>
 
@@ -327,17 +253,6 @@ heterogeneous two-class systems under GS and GNS cost functionals.
 <summary><strong>📌 Figure II.10 — Mean-Field and Microscopic Optimal Controls</strong></summary>
 
 <br>
-
-This figure compares the controls associated with the
-macroscopic mean-field equilibrium and the microscopic
-finite-player best-response formulation.
-
-The comparison provides a numerical illustration of the
-relationship between the two levels of description.
-
-The results are relevant to understanding how macroscopic
-optimal controls approximate individual strategies in
-finite-player traffic games.
 
 <div align="center">
 
@@ -356,8 +271,9 @@ equilibrium controls and microscopic best-response controls.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.10](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 7](https://doi.org/10.1016/j.trb.2025.103196).
+Comparison between optimal controls obtained from the macroscopic mean-field formulation and finite-player best-response controls.
+
+**Sources:** PhD thesis, Figure II.10; research article, Figure 7.
 
 </details>
 
@@ -365,28 +281,12 @@ equilibrium controls and microscopic best-response controls.
 
 # 🎯 4. Nash Equilibrium Approximation & Convergence
 
-The following figures investigate the numerical accuracy of
-mean-field approximations in finite-player traffic games.
-
-The analysis considers approximation errors and their behavior
-as the number of players increases.
+These experiments investigate the accuracy of mean-field equilibrium strategies as approximations of Nash equilibria in finite-player traffic games.
 
 <details>
 <summary><strong>📌 Figure II.8 — One-Class Nash Approximation Accuracy</strong></summary>
 
 <br>
-
-This figure presents numerical investigations of the approximation
-accuracy for the single-class traffic game.
-
-The analysis includes:
-
-- Mean approximation errors: MeanRA
-- Maximum approximation errors: MaxRA
-- Log–log representations of numerical convergence: log(MeanRA), log(MaxRA)
-
-These experiments help quantify how accurately mean-field-derived
-strategies approximate equilibria in finite-player systems.
 
 <div align="center">
 
@@ -405,8 +305,12 @@ and log–log convergence analysis for one-class traffic.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.8](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 10](https://doi.org/10.1016/j.trb.2025.103196).
+Mean and maximum approximation errors for the single-class traffic game.
+
+The results include log–log representations of the approximation errors as the number of players increases.
+
+**Sources:** PhD thesis, Figure II.8; research article, Figure 10.
+
 
 </details>
 
@@ -416,19 +320,6 @@ and log–log convergence analysis for one-class traffic.
 <summary><strong>📌 Figure II.11 — Two-Class Nash Approximation Accuracy</strong></summary>
 
 <br>
-
-This figure investigates mean-field approximation accuracy
-for a heterogeneous finite-player traffic game.
-
-The numerical experiments examine:
-
-- Mean approximation errors: MeanRA
-- Maximum approximation errors: MaxRA
-- Log–log representations of numerical convergence: log(MeanRA), log(MaxRA)
-
-The results provide numerical evidence about the approximation
-of finite-player Nash equilibria by multi-class mean-field
-equilibrium strategies.
 
 <div align="center">
 
@@ -447,8 +338,11 @@ and log–log convergence analysis for heterogeneous two-class traffic.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.11](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 6](https://doi.org/10.1016/j.trb.2025.103196).
+Mean and maximum approximation errors for heterogeneous finite-player traffic games.
+
+The numerical results examine the accuracy of multi-class mean-field equilibrium controls as approximate Nash strategies.
+
+**Sources:** PhD thesis, Figure II.11; research article, Figure 6.
 
 </details>
 
@@ -460,23 +354,6 @@ and log–log convergence analysis for heterogeneous two-class traffic.
 <summary><strong>📌 Figure II.12 — Singular-Value Decay and Low-Rank Structure</strong></summary>
 
 <br>
-
-This figure examines the singular-value structure of numerical
-solutions associated with the single-class traffic models.
-
-The analysis considers numerical matrices corresponding to:
-
-- Traffic density $\rho$.
-- Optimal velocity $u$.
-- Optimal cost $V$.
-
-Normalized singular-value decay is investigated across
-different spatial and temporal grid resolutions and
-different one-class cost functionals.
-
-The results provide insight into the numerical structure
-of the computed solutions and their potential suitability
-for low-rank approximation techniques.
 
 <div align="center">
 
@@ -495,32 +372,12 @@ density, velocity, and optimal-cost matrices.
 
 <br>
 
-**Reference:** [PhD thesis, Chapter II, Figure II.12](https://theses.hal.science/tel-05806256/document).
+Normalized singular-value decay of numerical matrices associated with traffic density, optimal velocity, and value functions.
 
+The analysis considers different discretization resolutions and single-class traffic cost formulations, illustrating the potential of low-rank approximation techniques.
+
+**Source:** PhD thesis, Figure II.12.
 </details>
-
----
-
-# ⚙️ Reproducibility & Numerical Experiments
-
-The numerical figures originate from the computational investigations
-presented in the associated research paper and PhD thesis.
-
-The experiments involve macroscopic mean-field game formulations
-and microscopic finite-player traffic models.
-
-Numerical procedures investigated in the research include:
-
-- Finite-difference discretizations.
-- Forward continuity equations.
-- Backward Hamilton–Jacobi–Bellman equations.
-- Optimal feedback control computation.
-- Nonlinear solvers and Newton–Krylov methods.
-- Parallel numerical computations.
-
-The availability of scripts, parameters, and input data may vary
-between experiments. Consult the repository source code and
-the associated publications for the documented computational setup.
 
 ---
 
@@ -528,29 +385,14 @@ the associated publications for the documented computational setup.
 
 **Research paper**
 
-A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami,
-*Computational investigations of a multi-class traffic flow model:
-mean-field and microscopic dynamics*,
-Transportation Research Part B: Methodological, 195 (2025), 103196.
+1. A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami, "Computational investigations of a multi-class traffic flow model: Mean-field and microscopic dynamics," *Transportation Research Part B: Methodological*, **195**, 103196 (2025). [DOI](https://doi.org/10.1016/j.trb.2025.103196).
 
-📄 [Journal publication](https://doi.org/10.1016/j.trb.2025.103196) ·
-[arXiv preprint](https://arxiv.org/abs/2306.13543)
-
-**PhD thesis**
-
-A. Machtalay,
-*Micro–macro modeling and scalable numerical methods for high-dimensional
-mean-field and control systems: structure-exploiting solvers and low-rank techniques*,
-2026.
-
-📖 [Read the PhD thesis](https://theses.hal.science/tel-05806256/document)
+2. A. Machtalay, *Micro–macro modeling and scalable numerical methods for high-dimensional mean-field and control systems: Structure-exploiting solvers and low-rank techniques*, PhD thesis (2026). [Full text](https://theses.hal.science/tel-05806256/document).
 
 ---
 
 <div align="center">
 
 [⬅ Back to Main Repository](../../README.md)
-
-<sub>Scientific figures from the numerical investigation of multi-class traffic flow models.</sub>
 
 </div>
