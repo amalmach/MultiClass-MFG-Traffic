@@ -2,48 +2,13 @@
 
 # 📊 Scientific Figures & Numerical Results
 
-### Multi-Class Traffic Flow Modeling with Mean-Field Games
+This gallery presents numerical results from the investigation of single-class and multi-class traffic flow models based on Nash Mean-Field Games (NMFGs).
 
-**Macroscopic Dynamics · Microscopic Simulations · Nash Equilibria · Numerical Analysis**
+The figures illustrate macroscopic traffic dynamics, microscopic finite-player games, mean-field equilibrium approximations, and numerical solution properties.
 
-[![Research Paper](https://img.shields.io/badge/Research_Paper-Transportation_Research_Part_B-blue)](https://doi.org/10.1016/j.trb.2025.103196)
-[![PhD Thesis](https://img.shields.io/badge/PhD_Thesis-2026-8A2BE2)](https://theses.hal.science/tel-05806256/document)
+The results are associated with the [research article](https://doi.org/10.1016/j.trb.2025.103196) and [PhD thesis](https://theses.hal.science/tel-05806256/document).
 
 </div>
-
----
-
-## 🔬 Overview
-
-This gallery presents scientific visualizations associated with the numerical
-investigation of single-class and multi-class traffic flow models.
-
-The experiments explore the relationship between **microscopic finite-player
-differential games** and their **macroscopic mean-field game formulations**.
-
-The numerical results illustrate:
-
-- Initial traffic density configurations.
-- Macroscopic density, velocity, and optimal-cost evolution.
-- Comparisons between different traffic cost functionals.
-- Microscopic trajectories, strategies, and best responses.
-- Mean-field approximations and ε-Nash equilibrium accuracy.
-- Singular-value decay and low-rank numerical structure.
-
-The figures correspond to numerical investigations presented in
-**Chapter II of the PhD thesis** and the associated research paper.
-
----
-
-## 🧭 Figure Navigation
-
-| Category | Figures | Description |
-|:---|:---|:---|
-| 🚗 Traffic Configurations | II.1–II.2 | Initial density distributions and vehicle arrangements |
-| 🌊 Macroscopic Simulations | II.3–II.6 | Traffic density, velocity, value functions, and fundamental diagrams |
-| 🚘 Microscopic Simulations | II.7, II.9–II.10 | Finite-player dynamics and best-response comparisons |
-| 🎯 Nash Equilibrium Accuracy | II.8, II.11 | Approximation errors and convergence analysis |
-| 📉 Low-Rank Structure | II.12 | Singular-value decay and numerical structure |
 
 ---
 
