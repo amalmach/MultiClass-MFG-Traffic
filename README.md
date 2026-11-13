@@ -2,8 +2,6 @@
 
 # Multi-Class Traffic Flow Modeling with Mean-Field Games
 
-### Mathematical Modeling · Numerical Methods · High-Performance Computing
-
 **Micro–Macro Dynamics | Nash Mean-Field Games | Scientific Computing | Traffic Simulation**
 
 <br>
@@ -14,8 +12,6 @@
 
 <br>
 
-*Research software for mathematical modeling and large-scale numerical investigation of heterogeneous traffic flow.*
-
 </div>
 
 ---
@@ -24,8 +20,6 @@
 <summary><h2>🔬 Project Overview</h2></summary>
 
 <br>
-
-### Research Motivation
 
 This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**.
 
