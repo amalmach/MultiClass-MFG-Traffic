@@ -170,6 +170,8 @@ The nonlinear solver uses an absolute residual tolerance specified by `--tol`, w
 
 PETSc command-line options can override the default solver configuration.
 
+The default configuration uses MUMPS for sparse direct factorization. Alternative PETSc linear solvers and preconditioners can be selected through command-line options, provided they are supported by the PETSc installation and are suitable for the system being solved.
+
 ### Command-Line Options
 
 | Option | Description | Default |
