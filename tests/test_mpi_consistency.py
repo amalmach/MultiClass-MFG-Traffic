@@ -42,8 +42,7 @@ def run_petsc(model, processes, output):
         "-pc_factor_mat_solver_type", "mumps",
     ]
 
-    # Additional MUMPS workspace was required in the
-    # previously validated four-process GNS configuration.
+    
     if model == "GNS" and processes == 4:
         command.extend(["-mat_mumps_icntl_14", "200"])
 
