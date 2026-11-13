@@ -406,8 +406,6 @@ def generate_plots(
         x[:-1] + x[1:]
     ) / 2.0
 
-    # Value-function positions follow the original
-    # staggered spatial representation.
     x_value = x[1:]
 
     labels = get_class_labels(J)
