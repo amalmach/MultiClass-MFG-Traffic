@@ -38,16 +38,6 @@ It establishes connections between:
 
 The research also investigates the ability of **mean-field equilibrium controls to provide approximate Nash strategies** for finite-player traffic games.
 
-### Project at a Glance
-
-| Mathematical Modeling | Numerical Computing | Traffic Applications |
-|:---|:---|:---|
-| Multi-class Nash Mean-Field Games | Finite difference methods | Cars and trucks |
-| Finite-player differential games | Newton–Krylov methods | Traffic density evolution |
-| Coupled HJB–continuity equations | LGMRES iterative solvers | Optimal velocity strategies |
-| Class-dependent cost functionals | Regularization and preconditioning | Traffic congestion dynamics |
-| Approximate Nash equilibria | MPI and PETSc | Micro–macro comparisons |
-
 > **Model scope:** The published model considers a single-lane traffic setting and does not explicitly impose microscopic collision-avoidance constraints. Multi-lane traffic and collision avoidance are possible future extensions.
 
 ### 🚀 Interactive Demonstrations
