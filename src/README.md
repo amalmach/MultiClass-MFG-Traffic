@@ -2,28 +2,11 @@
 
 # 💻 Source Code & Numerical Implementations
 
-### Multi-Class Traffic Flow Modeling with Mean-Field Games
+This directory contains numerical implementations for single-class and multi-class traffic flow models formulated as Nash Mean-Field Games (NMFGs).
 
-**Numerical Algorithms · Newton–Krylov Methods · High-Performance Computing**
-
-[![Research Paper](https://img.shields.io/badge/Research_Paper-Transportation_Research_Part_B-0B7285)](https://doi.org/10.1016/j.trb.2025.103196)
-[![PhD Thesis](https://img.shields.io/badge/PhD_Thesis-2026-6F42C1)](https://theses.hal.science/tel-05806256/document)
+The computational methods combine finite-difference discretizations, Newton–Krylov algorithms, and PETSc/MPI parallel solvers.
 
 </div>
-
----
-
-## 🔬 Overview
-
-This directory contains numerical implementations associated with
-the investigation of **single-class and multi-class traffic flow models**
-using **Nash Mean-Field Games (NMFGs)**.
-
-The computational framework combines finite-difference discretization,
-nonlinear iterative methods, and parallel scientific computing.
-
-The implementations are associated with the numerical investigations
-presented in the accompanying research paper and PhD thesis.
 
 ---
 
