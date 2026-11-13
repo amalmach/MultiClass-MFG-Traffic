@@ -290,8 +290,6 @@ Consult the [single-class documentation](one_class/ReadMe.md) for the original w
 
 ### SLURM Execution
 
-The repository includes a SLURM submission script for the single-class implementation.
-
 The supplied configuration requests:
 
 | Parameter | Value |
