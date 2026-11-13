@@ -161,11 +161,11 @@ The discretized traffic MFG equations form a nonlinear algebraic system $F(w)=0,
 
 where $w$ contains the discrete densities, velocities, and value functions for all vehicle classes.
 
-For $J$ classes, $N_x$ spatial cells, and $N_t$ time steps, the general multi-class implementation uses $N=(3N_t+2)JN_x $ unknowns.
+For $J$ classes, $N_x$ spatial cells, and $N_t$ time steps, the general multi-class implementation uses $N=(3N_t+2)JN_x$ unknowns.
 
-At each Newton iteration, the linearized system is $ J_F(w^{(k)})\delta w^{(k)} = -F(w^{(k)}),$
+At each Newton iteration, the linearized system is $J_F(w^{(k)})\delta w^{(k)} = -F(w^{(k)}),$
 
-followed by the update $ w^{(k+1)} = w^{(k)}+\delta w^{(k)}.$
+followed by the update $w^{(k+1)} = w^{(k)}+\delta w^{(k)}.$
 
 The general multi-class solver uses:
 
