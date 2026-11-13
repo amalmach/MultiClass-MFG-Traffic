@@ -9,3 +9,7 @@ matplotlib==3.10.0
 jupyterlab==4.3.4
 notebook==7.3.2
 ipykernel==6.29.5
+
+# Interactive simulator
+ipywidgets==8.1.9
+voila==0.5.13

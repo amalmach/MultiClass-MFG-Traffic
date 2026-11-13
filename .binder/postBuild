@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# Register the kernel expected by the interactive notebook.
+# The Binder demonstration uses the sequential NumPy/SciPy
+# solver, so PETSc is not required for this kernel.
+
+python -m ipykernel install \
+    --user \
+    --name traffic-petsc \
+    --display-name "Python (traffic-petsc)"
