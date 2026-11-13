@@ -2,7 +2,10 @@
 
 # Multi-Class Traffic Flow Modeling with Mean-Field Games
 
-This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**. The research also investigates the ability of **mean-field equilibrium controls to provide approximate Nash strategies** for finite-player traffic games.
+Numerical methods and implementations for multi-class traffic flow models based on Nash Mean-Field Games (NMFGs).
+
+This repository accompanies research on game-theoretic traffic modeling with heterogeneous vehicle populations, including cars and trucks. The investigations address macroscopic mean-field dynamics, microscopic finite-player games, and the approximation of Nash equilibria using mean-field controls.
+
 
 
 <br>
