@@ -295,10 +295,6 @@ def configure_parameters(args):
     # Update the original input module in memory
     # ----------------------------------------------
 
-    # Functions from inputs.py that read these global
-    # values at runtime will now see the new settings.
-    # This does not change the source file on disk.
-
     original_inputs.T = T
     original_inputs.L = L
     original_inputs.u_max = u_max
