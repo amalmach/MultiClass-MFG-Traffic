@@ -60,31 +60,6 @@ The macroscopic simulations describe the evolution of traffic density, optimal v
 <summary><strong>📌 Figure II.3 — One-Class Macroscopic Traffic Dynamics</strong></summary>
 
 <br>
-![Single-class macroscopic traffic dynamics](one_class_macroscopic_dynamics.png)
-
-Macroscopic numerical results for the single-class LWR, Separable, and Non-Separable models.
-
-The figure compares traffic densities, optimal velocities, value functions, and fundamental diagrams.
-
-**Sources:** PhD thesis, Figure II.3; research article, Figure 8.
-
-
-This figure presents numerical simulations for the single-class traffic model
-under three different formulations:
-
-- **LWR:** Lighthill–Whitham–Richards model.
-- **Separable:** Separable cost functional.
-- **Non-Separable:** Non-separable cost functional.
-
-The results illustrate the evolution of:
-
-- Traffic density $\rho$.
-- Optimal velocity $u$.
-- Optimal cost $V$.
-- Fundamental diagrams characterizing traffic flow behavior $q(\rho)=\rho u$.
-
-These comparisons help assess how different modeling assumptions influence
-the resulting traffic dynamics.
 
 <div align="center">
 
@@ -103,8 +78,11 @@ Separable, and Non-Separable models.
 
 <br>
 
-**References:** [PhD thesis, Chapter II, Figure II.3](https://theses.hal.science/tel-05806256/document) ·
-[Research paper, Figure 8](https://doi.org/10.1016/j.trb.2025.103196).
+Macroscopic numerical results for the single-class LWR, Separable, and Non-Separable models.
+
+The figure compares traffic densities, optimal velocities, value functions, and fundamental diagrams.
+
+**Sources:** PhD thesis, Figure II.3; research article, Figure 8.
 
 </details>
 
