@@ -16,6 +16,21 @@ This repository accompanies research on **multi-class traffic flow modeling usin
 
 </div>
 
+<div align="center">
+
+### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
+
+</div>
+
+
+<div align="center">
+
+### 💻 [Explore the Source Code & Numerical Implementations](src/README.md)
+
+<sub>Newton–Krylov Methods · PETSc · Parallel Computing · Numerical Experiments</sub>
+
+</div>
+
 ---
 ## Models
 
@@ -86,43 +101,7 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
 See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. 
 
 ---
-## Numerical Results & Scientific Visualizations
-
-The numerical investigations explore **single-class and multi-class traffic dynamics** through macroscopic mean-field models and microscopic finite-player games.
-
-The experiments cover different traffic configurations and cost functionals (**LWR, GLWR, GS, and GNS**), together with the numerical assessment of **mean-field approximations, ε-Nash equilibria, and low-rank structures**.
-
-A complete gallery of the numerical results, including **12 scientific figures**, detailed descriptions, and references to the corresponding publications, is available below.
-
-<div align="center">
-
-### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
-
-</div>
-
----
-
-## Source Code & Computational Workspace
-
-The repository provides numerical implementations for solving
-**single-class and multi-class Nash Mean-Field Game traffic models**.
-
-The computational framework includes **Newton–Krylov algorithms,
-finite-difference methods, and PETSc-based parallel implementations**.
-
-Detailed information about the code organization, numerical methods,
-and execution procedures is provided in the dedicated source-code documentation.
-
-<div align="center">
-
-### 💻 [Explore the Source Code & Numerical Implementations](src/README.md)
-
-<sub>Newton–Krylov Methods · PETSc · Parallel Computing · Numerical Experiments</sub>
-
-</div>
-
----
-## References<
+## References
 
 ### Journal Publication — 2025
 
