@@ -5,34 +5,7 @@
 This directory contains Python implementations of Newton–Krylov methods
 for solving traffic flow models formulated within the framework of
 **Mean-Field Games (MFGs)**.
-</div>
 
----
-
-## 1. Overview
-
-Traffic Mean-Field Games describe the evolution of vehicle populations
-whose dynamics depend on the interactions between traffic density,
-individual velocity choices, and optimal control.
-
-For a system with $J$ vehicle classes, each class
-$j=1,\ldots,J$ is characterized by:
-
-- A traffic density $\rho_j(t,x)$.
-- An optimal velocity $u_j(t,x)$.
-- A value function $V_j(t,x)$.
-- A traffic flux $Q_j(t,x)$.
-
-The traffic flux is defined by $Q_j(t,x)=\rho_j(t,x)u_j(t,x).$
-
-The interaction between vehicle populations is represented through
-class-dependent cost functions and the density vector $\boldsymbol{\rho} = (\rho_1,\rho_2,\ldots,\rho_J).$
-
-The numerical objective is to solve the coupled discretized equations
-governing traffic densities, optimal controls, and value functions.
-
-The three directories provide complementary implementations
-of the traffic MFG framework.
 
 | Directory | Vehicle Classes | Description |
 |---|---|---|
@@ -44,14 +17,24 @@ The `multi_class/` directory provides an explicitly organized
 implementation of the general $J$-class algorithm described in
 Appendix D.1 of the PhD thesis.
 
+</div>
+
 ---
 
-## 3. Mathematical Models
+## Mathematical Models
 
-The research framework considers traffic models with different
-cost functionals.
+Consider $J$ vehicle classes, indexed by $j=1,\ldots,J$.
 
-The general multi-class implementation supports three models:
+Each class is described by:
+
+- $\rho_j(t,x)$: traffic density;
+- $u_j(t,x)$: optimal velocity;
+- $V_j(t,x)$: value function;
+- $Q_j(t,x)=\rho_j(t,x)u_j(t,x)$: traffic flux.
+
+The governing system couples continuity equations, Hamilton–Jacobi–Bellman equations, and optimal velocity conditions.
+
+The general multi-class implementation supports three cost formulations:
 
 | Model | Abbreviation | Description |
 |---|---|---|
@@ -59,7 +42,7 @@ The general multi-class implementation supports three models:
 | Generalized Separable | **GS** | Separable velocity and density costs |
 | Generalized Non-Separable | **GNS** | Coupled velocity-density cost |
 
-### 3.1. Generalized Lighthill–Whitham–Richards (GLWR)
+### Generalized Lighthill–Whitham–Richards (GLWR)
 
 For vehicle class $j$, the desired velocity is 
 
@@ -93,7 +76,7 @@ $\sum_{m=1}^{J} \frac{\rho_m}{\rho_{\mathrm{jam},m}} \leq 1.$
 Unlike GS and GNS, the implemented GLWR optimal control is not
 explicitly clipped to the interval $[0,u_{\max,j}]$.
 
-### 3.2. Generalized Separable (GS)
+### Generalized Separable (GS)
 
 The running cost is
 
@@ -125,7 +108,7 @@ The optimal velocity therefore satisfies
 $0\leq u_j^*\leq u_{\max,j}.$
 </p>
 
-### 3.3. Generalized Non-Separable (GNS)
+### Generalized Non-Separable (GNS)
 
 The running cost is
 
@@ -172,173 +155,67 @@ the optimal velocity.
 
 ---
 
-## 4. Numerical Methodology
+## Numerical Method
 
-### 4.1. Discretized Nonlinear System
+The discretized traffic MFG equations form a nonlinear algebraic system $F(w)=0,$
 
-After discretization, the traffic MFG equations are assembled into
-a nonlinear system $F(w)=0.$
+where $w$ contains the discrete densities, velocities, and value functions for all vehicle classes.
 
-The unknown vector contains the discretized densities,
-velocities, and value functions for all vehicle classes.
+For $J$ classes, $N_x$ spatial cells, and $N_t$ time steps, the general multi-class implementation uses $N=(3N_t+2)JN_x $ unknowns.
 
-For the general $J$-class implementation, the number
-of unknowns is $N=(3N_t+2)JN_x,$
+At each Newton iteration, the linearized system is $ J_F(w^{(k)})\delta w^{(k)} = -F(w^{(k)}),$
 
-where:
+followed by the update $ w^{(k+1)} = w^{(k)}+\delta w^{(k)}.$
 
-- $N_x$ is the number of spatial cells.
-- $N_t$ is the number of temporal steps.
-- $J$ is the number of vehicle classes.
+The general multi-class solver uses:
 
-### 4.2. Newton Linearization
+- Analytical sparse Jacobian assembly;
+- GMRES for the Newton linear systems;
+- Sparse LU preconditioning;
+- Optional incomplete LU preconditioning;
+- Coarse-to-fine interpolation for initializing refined-grid solutions.
 
-At iteration $k$, Newton's method solves
-
-<p align="center">
-$J_F(w^{(k)})\delta w^{(k)}
-=
--F(w^{(k)}),$
-</p>
-
-where $J_F$ denotes the Jacobian matrix.
-
-The solution is updated according to
-
-<p align="center">
-$w^{(k+1)}
-=
-w^{(k)}+\delta w^{(k)}.$
-</p>
-
-### 4.3. Krylov Linear Solvers
-
-The Newton linear systems are solved using Krylov-subspace methods.
-
-The repository includes implementations using GMRES-related
-numerical methods.
-
-The general $J$-class implementation uses
-**sequential Newton–GMRES**.
-
-The original single-class research workflow also includes
-Newton–Krylov computations using LGMRES.
-
-### 4.4. Sparse Jacobian and Preconditioning
-
-The general multi-class implementation uses:
-
-- Analytical sparse Jacobian assembly.
-- Approximate Jacobians for preconditioning.
-- Sparse LU factorization through SciPy.
-- Optional incomplete LU factorization.
-
-The preconditioner approximates the inverse action of
-the Jacobian and is supplied to GMRES as a linear operator.
-
-### 4.5. Multigrid Interpolation
-
-Coarse-grid numerical solutions can be interpolated onto
-finer spatial-temporal grids.
-
-The general $J$-class implementation uses cubic interpolation
-in space and time, following Appendix D.1 of the thesis.
-
-The interpolated solution provides the initial guess
-for the Newton–GMRES iterations on the refined grid.
+The grid-refinement procedure interpolates a converged solution onto a finer grid before starting the next nonlinear solve.
 
 ---
 
-## 5. Single-Class Implementation
-
-**Directory:** [`one_class/`](one_class/)
-
-This directory contains the original numerical research code
-for a homogeneous vehicle population.
-
-The implementation includes the nonlinear MFG system,
-index mappings, Jacobian-related operations, Krylov solvers,
-and numerical preconditioning and refinement utilities.
-
-### Reproducible Single-Class Demonstration
-
-An interactive LWR demonstration is available in the
-repository:
-
-[Single-Class LWR Notebook](../../../notebooks/one_class_LWR.ipynb)
-
-The example can also be executed using:
-
-```bash
-python3 examples/one_class_demo/run_demo.py
-```
-
-Generate the corresponding figures with:
-
-```bash
-python3 examples/one_class_demo/plot_results.py
-```
-
-These commands should be executed from the repository root.
-
-### Interactive Notebook
-
-The single-class LWR notebook can be launched
-directly in a browser:
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb)
-
-The notebook supports numerical experimentation without
-requiring a local installation.
-
----
-
-## 6. Two-Class Implementation
-
-**Directory:** [`two_class/`](two_class/)
-
-This directory contains the original research implementation
-for two interacting vehicle populations.
-
-The two-class setting allows different physical characteristics
-for each vehicle population, including class-dependent
-velocities and jam densities.
-
-It provides a dedicated implementation of the two-population
-traffic MFG problem and preserves the numerical code
-associated with the research work.
-
----
-
-## 7. General Multi-Class Implementation
+## General Multi-Class Implementation
 
 **Directory:** [`multi_class/`](multi_class/)
 
-This directory contains the implementation of the
-**Sequential Newton–GMRES solver** for an arbitrary number
-of vehicle classes.
-
-It follows:
-
-**Appendix D.1 — Sequential Newton–GMRES solver**
-
-of the PhD thesis.
-
 ### Source Files
 
-| File | Purpose |
-|---|---|
-| `inputs.py` | Physical parameters, initial densities, and numerical settings |
-| `indx_funcs.py` | Index mappings and solution reconstruction |
+| File | Description |
+|:---|:---|
+| `main.py` | Simulation driver and command-line interface |
+| `inputs.py` | Model parameters and initial conditions |
 | `cost_functions.py` | GLWR, GS, and GNS cost functions |
+| `indx_funcs.py` | Index mappings and solution reconstruction |
 | `newton_func.py` | Nonlinear residual assembly |
-| `jacobian_exact.py` | Exact and approximate analytical Jacobians |
-| `gmres_solver.py` | Sequential Newton–GMRES algorithm |
-| `precond.py` | Sparse LU/ILU preconditioners |
-| `multi_grid.py` | Coarse-to-fine cubic interpolation |
-| `main.py` | Complete simulation and grid-refinement workflow |
+| `jacobian_exact.py` | Analytical sparse Jacobian assembly |
+| `gmres_solver.py` | Newton–GMRES iterations |
+| `precond.py` | Sparse LU and incomplete LU preconditioning |
+| `multi_grid.py` | Coarse-to-fine interpolation |
 
-### Running GLWR
+### Requirements
+
+The general multi-class solver requires:
+
+- Python 3;
+- NumPy;
+- SciPy.
+
+Install the Python dependencies with:
+
+```bash
+python3 -m pip install numpy scipy
+```
+
+### Running the Solver
+
+Execute the following commands from the repository root.
+
+**GLWR:**
 
 ```bash
 python3 src/newton_krylov/multi_class/main.py \
@@ -346,10 +223,11 @@ python3 src/newton_krylov/multi_class/main.py \
     --model GLWR \
     --nx 5 \
     --nt 8 \
-    --max-grids 2
+    --max-grids 1 \
+    --output sequential_J3_GLWR.npz
 ```
 
-### Running GS
+**GS:**
 
 ```bash
 python3 src/newton_krylov/multi_class/main.py \
@@ -357,10 +235,11 @@ python3 src/newton_krylov/multi_class/main.py \
     --model GS \
     --nx 5 \
     --nt 8 \
-    --max-grids 2
+    --max-grids 1 \
+    --output sequential_J3_GS.npz
 ```
 
-### Running GNS
+**GNS:**
 
 ```bash
 python3 src/newton_krylov/multi_class/main.py \
@@ -368,32 +247,41 @@ python3 src/newton_krylov/multi_class/main.py \
     --model GNS \
     --nx 5 \
     --nt 8 \
-    --max-grids 2
+    --max-grids 1 \
+    --output sequential_J3_GNS.npz
 ```
 
-### Changing the Number of Vehicle Classes
+The `--J` argument specifies the number of vehicle classes.
 
-The number of classes is controlled by the `--J` argument.
+For $J>2$, the default parameters and initial-density profiles are illustrative class-dependent configurations. The original two-class parameterization is retained separately.
 
-For example, a five-class GLWR experiment can be launched with:
+### Command-Line Options
+
+| Option | Description | Default |
+|:---|:---|:---|
+| `--J` | Number of vehicle classes | `2` |
+| `--model` | Traffic model: `GLWR`, `GS`, or `GNS` | `GLWR` |
+| `--nx` | Initial number of spatial cells | Model configuration |
+| `--nt` | Minimum initial number of time steps | Model configuration |
+| `--max-grids` | Number of grid levels | `1` |
+| `--newton-tol` | Nonlinear residual tolerance | `1e-8` |
+| `--gmres-rtol` | GMRES relative tolerance | `1e-8` |
+| `--max-newton-iter` | Maximum Newton iterations | `50` |
+| `--no-precond` | Disable sparse LU preconditioning | Disabled |
+| `--no-multigrid` | Disable interpolation-based initialization on refined grids | Disabled |
+| `--output` | Output filename in NumPy `.npz` format | No file |
+
+The available options can be displayed with:
 
 ```bash
-python3 src/newton_krylov/multi_class/main.py \
-    --J 5 \
-    --model GLWR \
-    --nx 5 \
-    --nt 8 \
-    --max-grids 1
+python3 src/newton_krylov/multi_class/main.py --help
 ```
 
-**Parameter note:** The original two-class physical parameters
-are retained from the thesis. For $J>2$, the implementation
-uses illustrative class-dependent parameters and initial-density
-profiles. 
+### Grid Refinement
 
-### Saving Numerical Results
+Multiple grid levels can be requested using `--max-grids`.
 
-The general solver supports saving results in NumPy format:
+For example:
 
 ```bash
 python3 src/newton_krylov/multi_class/main.py \
@@ -402,95 +290,93 @@ python3 src/newton_krylov/multi_class/main.py \
     --nx 5 \
     --nt 8 \
     --max-grids 2 \
-    --output multi_class_J3_GLWR.npz
+    --output sequential_J3_GLWR_refined.npz
 ```
 
-The resulting file contains:
+The solver initializes the refined-grid solution by interpolating the preceding grid solution.
+
+The permitted number of grid levels depends on the model configuration.
+
+### Output Format
+
+When `--output` is specified, numerical results are saved as a compressed NumPy archive.
+
+The principal output arrays are:
 
 | Variable | Shape | Description |
-|---|---|---|
-| `rho` | `(J, Nx, Nt+1)` | Traffic density |
-| `u` | `(J, Nx, Nt)` | Optimal velocity |
-| `V` | `(J, Nx, Nt+1)` | Value function |
-| `Q` | `(J, Nx, Nt)` | Traffic flux |
+|:---|:---|:---|
+| `solution` | `(N,)` | Complete discrete solution vector |
+| `rho` | `(J, Nx, Nt+1)` | Traffic densities |
+| `u` | `(J, Nx, Nt)` | Optimal velocities |
+| `V` | `(J, Nx, Nt+1)` | Value functions |
+| `Q` | `(J, Nx, Nt)` | Traffic fluxes |
+| `x` | `(Nx,)` | Spatial grid |
+| `t` | `(Nt+1,)` | Temporal grid |
 
-The archive also stores numerical parameters,
-the computational grid, and residual norms.
+The archive also contains the discretization parameters, model information, and nonlinear residual norms.
 
----
+An output file can be loaded using:
 
-## 8. Numerical Verification
+```python
+import numpy as np
 
-The general $J$-class solver has been tested for
-three vehicle classes using GLWR, GS, and GNS.
-### 8.1. Grid Refinement
-### 8.2. Nonlinear Convergence: 
+with np.load("sequential_J3_GLWR.npz") as data:
+    rho = data["rho"]
+    u = data["u"]
+    V = data["V"]
+    Q = data["Q"]
 
-All three models converged below the prescribed tolerance $\|F(w)\|_2<10^{-8}.$
-
-### 8.3. Mass Conservation
-
-For the three-class GLWR simulation, the discrete mass
-of each class was computed as $M_j^n = \Delta x \sum_{k=1}^{N_x} \rho_{j,k}^{n}.$
-
-### 8.4. Physical Admissibility
-
-For the validated three-class GLWR, GS, and GNS
-experiments:
-
-- Computed traffic densities were nonnegative.
-- Computed optimal velocities were nonnegative.
-- Computed velocities remained below their
-  class-dependent free-flow maximum values.
-
----
-
-## 9. Requirements
-
-The Newton–Krylov implementations use Python
-and scientific computing libraries.
-
-The general multi-class implementation requires:
-
-- Python 3
-- NumPy
-- SciPy
-
-Install these packages using:
-
-```bash
-python3 -m pip install numpy scipy
+print("Density shape:", rho.shape)
+print("Velocity shape:", u.shape)
 ```
 
-The repository's separate PETSc-based implementations
-may require additional packages and system dependencies.
+---
+
+## Single-Class Implementation
+
+**Directory:** [`one_class/`](one_class/)
+
+The single-class directory contains the original Newton–Krylov research implementation for a homogeneous vehicle population.
+
+It includes the nonlinear traffic MFG system, Jacobian-related operations, Krylov solvers, preconditioning, and grid-refinement utilities.
+
+A standalone LWR example is available in the repository:
+
+```bash
+python3 examples/one_class_demo/run_demo.py
+```
+
+The corresponding figures can be generated with:
+
+```bash
+python3 examples/one_class_demo/plot_results.py
+```
+
+An interactive demonstration is available in the [single-class LWR notebook](../../notebooks/one_class_LWR.ipynb).
+
+The notebook can also be launched using [Binder](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb).
 
 ---
 
-## 10. References
+## Two-Class Implementation
 
-### Research Article
+**Directory:** [`two_class/`](two_class/)
 
-**A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami (2025).**
+This directory contains the original numerical implementation for two interacting vehicle populations.
 
-*Computational investigations of a multi-class traffic flow model:
-mean-field and microscopic dynamics.*
+The model accounts for class-dependent traffic characteristics, including free-flow velocities, jam densities, and density-dependent interactions.
 
-**Transportation Research Part B: Methodological**, 195, 103196.
+The implementation is retained separately from the general $J$-class solver.
 
-DOI: [10.1016/j.trb.2025.103196](https://doi.org/10.1016/j.trb.2025.103196)
+---
 
-### PhD Thesis
+## References
 
-**A. Machtalay (2026).**
+1. A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami, “Computational investigations of a multi-class traffic flow model: Mean-field and microscopic dynamics,” *Transportation Research Part B: Methodological*, **195**, 103196 (2025). [DOI](https://doi.org/10.1016/j.trb.2025.103196).
 
-*Micro–macro modeling and scalable numerical methods for high-dimensional
-mean-field and control systems: structure-exploiting solvers and
-low-rank techniques.*
+2. A. Machtalay, *Micro–macro modeling and scalable numerical methods for high-dimensional mean-field and control systems: Structure-exploiting solvers and low-rank techniques*, PhD thesis (2026). [Full text](https://theses.hal.science/tel-05806256/document).
 
-Appendix D.1: **Sequential Newton–GMRES solver**.
-
-[PhD Thesis — HAL](https://theses.hal.science/tel-05806256/document)
+The general multi-class sequential solver follows the numerical methodology described in Appendix D.1 of the thesis.
 
 ---
 
