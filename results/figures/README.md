@@ -68,10 +68,6 @@ The macroscopic simulations describe the evolution of traffic density, optimal v
 
 <br>
 
-<sub>
-<b>Figure II.3.</b> Macroscopic traffic dynamics for the LWR,
-Separable, and Non-Separable models.
-</sub>
 
 </div>
 
@@ -99,11 +95,6 @@ The figure compares traffic densities, optimal velocities, value functions, and 
      width="900">
 
 <br>
-
-<sub>
-<b>Figure II.4.</b> Macroscopic numerical results for the GLWR model
-under the TC, CT, and TCT configurations.
-</sub>
 
 </div>
 
