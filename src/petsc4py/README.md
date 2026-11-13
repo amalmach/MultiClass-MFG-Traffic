@@ -190,8 +190,6 @@ Available options can be displayed with:
 python3 src/petsc4py/multi_class/main.py --help
 ```
 
-Additional PETSc options can be supplied directly on the command line.
-
 ### PETSc Solver Options
 
 The following options are useful for controlling and monitoring the numerical solver.
