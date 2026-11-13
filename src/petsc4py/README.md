@@ -29,7 +29,7 @@ The parallel solver uses:
 - **PETSc PC** for preconditioning and sparse factorization.
 - **MPI/mpi4py** for distributed vectors and matrices.
 - **Analytical sparse Jacobians** for the nonlinear system.
-- **MUMPS** for sparse direct factorization in the documented execution examples.
+- **MUMPS** for sparse direct LU factorization of the Newton linear systems.
 
 The general multi-class implementation shares its mathematical functions with the sequential Newton–Krylov solver located in [`../newton_krylov/multi_class/`](../newton_krylov/multi_class/).
 
@@ -108,7 +108,17 @@ This check does not verify MUMPS availability; that is established by running a 
 
 ## Running the Multi-Class Solver
 
-All commands below should be executed from the repository root.
+All commands should be executed from the repository root.
+
+The solver uses PETSc SNES for nonlinear Newton iterations and MUMPS for direct sparse LU factorization.
+
+The default linear solver configuration is:
+
+- **KSP:** `preonly`
+- **PC:** `lu`
+- **Factorization:** `mumps`
+
+MUMPS must be available in the PETSc installation.
 
 ### GLWR Model
 
@@ -118,10 +128,8 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     --model GLWR \
     --nx 5 \
     --nt 8 \
-    --output petsc_J3_GLWR.npz \
-    -ksp_type preonly \
-    -pc_type lu \
-    -pc_factor_mat_solver_type mumps
+    --tol 1e-8 \
+    --output petsc_J3_GLWR.npz
 ```
 
 ### GS Model
@@ -132,10 +140,8 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     --model GS \
     --nx 5 \
     --nt 8 \
-    --output petsc_J3_GS.npz \
-    -ksp_type preonly \
-    -pc_type lu \
-    -pc_factor_mat_solver_type mumps
+    --tol 1e-8 \
+    --output petsc_J3_GS.npz
 ```
 
 ### GNS Model
@@ -146,23 +152,23 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     --model GNS \
     --nx 5 \
     --nt 8 \
-    --output petsc_J3_GNS.npz \
-    -ksp_type preonly \
-    -pc_type lu \
-    -pc_factor_mat_solver_type mumps
+    --tol 1e-8 \
+    --output petsc_J3_GNS.npz
 ```
 
 The number of MPI processes is specified using `-np`.
 
-For example, to run GLWR with four processes, replace `-np 2` with `-np 4`.
+For example, replace `-np 2` with `-np 4` to run the solver with four MPI processes.
 
-Depending on the model, grid size, and number of processes, additional MUMPS workspace may be required. For example:
+Depending on the model, grid size, and number of processes, additional MUMPS workspace may be required:
 
 ```bash
 -mat_mumps_icntl_14 200
 ```
 
-This option increases the MUMPS workspace allocation parameter.
+The nonlinear solver uses an absolute residual tolerance specified by `--tol`, with a default relative tolerance of `1e-12`.
+
+PETSc command-line options can override the default solver configuration.
 
 ### Command-Line Options
 
