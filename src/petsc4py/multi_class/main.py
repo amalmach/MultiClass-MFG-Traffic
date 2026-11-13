@@ -490,25 +490,19 @@ def run_solver():
     )
 
     # --------------------------------------------------------
-    # Configure the PETSc Krylov solver
+    # Configure the PETSc linear solver
     # --------------------------------------------------------
 
     ksp = snes.getKSP()
 
-    ksp.setType("gmres")
-
-    ksp.setTolerances(
-        rtol=args.tol,
-    )
-
-    # Portable baseline preconditioner.
-    #
-    # This is not equivalent to SuperLU_DIST.
-    # Cluster-specific solver options may override it.
+    # Direct solution of the Newton linear systems.
+    ksp.setType("preonly")
 
     pc = ksp.getPC()
 
-    pc.setType("bjacobi")
+    # LU factorization using MUMPS.
+    pc.setType("lu")
+    pc.setFactorSolverType("mumps")
 
     # --------------------------------------------------------
     # Configure nonlinear convergence
@@ -516,7 +510,7 @@ def run_solver():
 
     snes.setTolerances(
         atol=args.tol,
-        rtol=args.tol,
+        rtol=1e-12,
         max_it=args.max_it,
     )
 
