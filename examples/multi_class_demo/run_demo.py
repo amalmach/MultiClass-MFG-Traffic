@@ -16,8 +16,6 @@ Supported models:
 The demonstration uses the numerical implementation in:
 
     src/newton_krylov/multi_class/
-
-No numerical algorithms are duplicated in this script.
 """
 
 import argparse
