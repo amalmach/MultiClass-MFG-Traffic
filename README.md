@@ -2,7 +2,9 @@
 
 # Multi-Class Traffic Flow Modeling with Mean-Field Games
 
-**Micro–Macro Dynamics | Nash Mean-Field Games | Scientific Computing | Traffic Simulation**
+This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**. The research also investigates the ability of **mean-field equilibrium controls to provide approximate Nash strategies** for finite-player traffic games.
+
+> **Model scope:** The published model considers a single-lane traffic setting and does not explicitly impose microscopic collision-avoidance constraints. Multi-lane traffic and collision avoidance are possible future extensions.
 
 <br>
 
@@ -15,38 +17,7 @@
 </div>
 
 ---
-
-<details open>
-<summary><h2>🔬 Project Overview</h2></summary>
-
-<br>
-
-This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**.
-
-It establishes connections between:
-
-- **Microscopic models:** Finite-player differential games describing individual vehicle dynamics.
-- **Macroscopic models:** Nash Mean-Field Games describing interactions between vehicle populations.
-- **Numerical methods:** Algorithms for solving coupled nonlinear PDE systems.
-- **High-performance computing:** Parallel implementations for large-scale numerical experiments.
-
-The research also investigates the ability of **mean-field equilibrium controls to provide approximate Nash strategies** for finite-player traffic games.
-
-> **Model scope:** The published model considers a single-lane traffic setting and does not explicitly impose microscopic collision-avoidance constraints. Multi-lane traffic and collision avoidance are possible future extensions.
-
-### 🚀 Interactive Demonstrations
-
-Explore the numerical methods directly in your browser using 
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb)
-
-</details>
-
----
-
-<details>
-<summary><h2>📐 MModels</h2></summary>
-
-<br>
+## Models
 
 The multi-class implementations support three traffic cost formulations:
 
@@ -70,129 +41,66 @@ The simulations analyze density evolution, class-dependent velocities, interacti
 
 The investigations provide computational evidence supporting the effectiveness of the ε-Nash approximation.
 
-</details>
-
 ---
 
-<details>
-<summary><h2>⚙️ Numerical Methods & High-Performance Computing</h2></summary>
+## Quick start
 
-<br>
+Run the commands below from the repository root.
 
-The coupled Nash Mean-Field Game formulation leads to a large nonlinear algebraic system after space–time discretization.
+### Single-class example
 
-The numerical methodology combines discretization schemes, iterative nonlinear solvers, regularization, and high-performance computing.
+Requires Python, NumPy, and SciPy.
 
-<details>
-<summary><strong>📏 1. Space–Time Finite Difference Discretization</strong></summary>
+```bash
+python3 examples/one_class_demo/run_demo.py --help
+python3 examples/one_class_demo/run_demo.py
+```
 
-<br>
+The [interactive notebook](notebooks/one_class_LWR.ipynb) can also be opened through [Binder](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb).
 
-The spatial and temporal domains are discretized using uniform grids.
+### Sequential multi-class solver
 
-The numerical formulation includes:
+Requires Python, NumPy, and SciPy.
 
-- Lax–Friedrichs discretization of the continuity equation.
-- Upwind finite differences for the HJB equation.
-- Discretization of optimal feedback laws.
-- Periodic boundary conditions.
-- Courant–Friedrichs–Lewy (CFL) stability restrictions.
+```bash
+python3 src/newton_krylov/multi_class/main.py \
+    --J 3 --model GLWR --nx 5 --nt 8 --max-grids 1 \
+    --output sequential_J3_GLWR.npz
+```
 
-The resulting discretization produces a coupled nonlinear system involving the unknown density, velocity, and value-function variables.
+Replace `GLWR` with `GS` or `GNS` to select another cost model. See the [Newton–Krylov documentation](src/newton_krylov/README.md) for numerical parameters and refinement options.
 
-**References:**
-[Research paper, §3.1](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.6.1](https://theses.hal.science/tel-05806256/document)
+### Parallel multi-class solver
 
-</details>
+Requires a compatible installation of PETSc, MPI, `petsc4py`, and `mpi4py`, with MUMPS support for the command below.
 
-<br>
+```bash
+mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
+    --J 3 --model GLWR --nx 5 --nt 8 \
+    --output petsc_J3_GLWR_MPI2.npz \
+    -ksp_type preonly \
+    -pc_type lu \
+    -pc_factor_mat_solver_type mumps
+```
 
-<details>
-<summary><strong>🔢 2. Newton–Krylov and LGMRES Solvers</strong></summary>
+See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. The general $J$-class PETSc implementation currently evaluates the full residual and Jacobian on each MPI process; its distributed execution has been checked on small problems but is not optimized for strong scaling.
 
-<br>
+## Numerical verification
 
-The nonlinear algebraic system is treated using Newton-type iterative methods.
+For a three-class test with $N_x=5$ spatial cells, $N_t=8$ time steps, and 390 unknowns, the GLWR, GS, and GNS implementations were evaluated using 1, 2, and 4 MPI processes. The tested solutions agreed across process counts within numerical tolerance and conserved class-wise discrete mass.
 
-The computational approach includes:
+Comparisons with the sequential Newton–GMRES implementation gave the following relative $L^2$ differences:
 
-- Newton iterations.
-- Krylov subspace methods.
-- LGMRES iterative linear solvers.
-- Numerical treatment of ill-conditioned Jacobians.
-- Regularization-continuation techniques.
-- Preconditioning and initialization strategies.
+| Model | Relative $L^2$ difference (sequential vs. PETSc) |
+| --- | ---: |
+| GLWR | $1.11\times10^{-12}$ |
+| GS | $9.65\times10^{-12}$ |
+| GNS | $9.10\times10^{-9}$ |
 
-These methodologies are investigated to improve numerical robustness and enable larger computational experiments.
-
-**References:**
-[Research paper, §3.2](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.6.2-II.6.9](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>⚡ 3. High-Performance Computing</strong></summary>
-
-<br>
-
-The project investigates parallel numerical implementations for large-scale traffic simulations.
-
-The computational tools include:
-
-| Technology | Role |
-|:---|:---|
-| Python | Scientific programming |
-| NumPy / SciPy | Numerical computing |
-| PETSc / petsc4py | Scalable numerical solvers |
-| MPI / mpi4py | Parallel computing |
-| Pyccel | Performance-oriented numerical computing |
-| LGMRES | Iterative linear system solution |
-
-The associated research reports experiments involving nonlinear systems of up to approximately **88 million unknowns**.
-
-**References:**
-[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.6](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🧮 4. Numerical Conditioning, Regularization and Computational Challenges</strong></summary>
-
-<br>
-
-The research investigates several numerical challenges associated with coupled forward–backward PDE systems:
-
-- Ill-conditioned Jacobian matrices.
-- Nonlinear solver convergence.
-- Numerical regularity.
-- Shock formation.
-- Initialization strategies.
-- Regularization–continuation.
-- Computational scalability.
-
-These issues motivate the investigation of advanced numerical methods and scalable computational approaches.
-
-**References:**
-[Research paper, §3](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.6 and II.10](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-</details>
+These are small-grid numerical consistency checks, not parallel performance benchmarks. Additional numerical figures are available in the [results gallery](results/figures/README.md).
 
 ---
-
-<details>
-<summary><h2>📊 Numerical Results & Scientific Visualizations</h2></summary>
-
-<br>
+## Numerical Results & Scientific Visualizations
 
 The numerical investigations explore **single-class and multi-class traffic dynamics** through macroscopic mean-field models and microscopic finite-player games.
 
@@ -204,18 +112,11 @@ A complete gallery of the numerical results, including **12 scientific figures**
 
 ### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
 
-<sub>Traffic Configurations · Macroscopic Dynamics · Microscopic Simulations · Nash Equilibrium Accuracy · Low-Rank Analysis</sub>
-
 </div>
-
-</details>
 
 ---
 
-<details>
-<summary><h2>💻 Source Code & Computational Workspace</h2></summary>
-
-<br>
+## Source Code & Computational Workspace
 
 The repository provides numerical implementations for solving
 **single-class and multi-class Nash Mean-Field Game traffic models**.
@@ -234,14 +135,8 @@ and execution procedures is provided in the dedicated source-code documentation.
 
 </div>
 
-</details>
-
 ---
-
-<details>
-<summary><h2>📚 Publications & Scientific References</h2></summary>
-
-<br>
+## References<
 
 ### Journal Publication — 2025
 
@@ -267,34 +162,6 @@ and execution procedures is provided in the dedicated source-code documentation.
 
 [![Thesis](https://img.shields.io/badge/Read_PhD_Thesis-HAL-6F42C1)](https://theses.hal.science/tel-05806256/document)
 
-### Original Research Code
-
-The original implementation has been preserved through the GitHub release:
-
-[![Original Release](https://img.shields.io/badge/Original_Research_Code-v1.0.0--original-2F855A)](https://github.com/amalmach/MultiClass-MFG-Traffic/releases/tag/v1.0.0-original)
-
-This release preserves a reference snapshot of the repository before subsequent restructuring and software extensions.
-
-</details>
-
----
-
-<details>
-<summary><h2>👩‍💻 Development & Contributions</h2></summary>
-
-<br>
-
-### Lead Developer & Repository Maintainer
-
-**[Amal Machtalay](https://github.com/amalmach)**
-
-This repository originated from collaborative research associated with the scientific publication cited above.
-
-The existing software license and applicable contributor notices remain in force.
-
-For reuse conditions, consult the repository's [LICENSE](LICENSE).
-
-</details>
 
 ---
 
