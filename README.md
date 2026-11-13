@@ -4,7 +4,6 @@
 
 This repository accompanies research on **multi-class traffic flow modeling using Nash Mean-Field Games (NMFGs)**. The project extends a single-class, single-lane game-theoretic traffic framework to heterogeneous vehicle populations, with numerical investigations focusing on **cars and trucks**. The research also investigates the ability of **mean-field equilibrium controls to provide approximate Nash strategies** for finite-player traffic games.
 
-> **Model scope:** The published model considers a single-lane traffic setting and does not explicitly impose microscopic collision-avoidance constraints. Multi-lane traffic and collision avoidance are possible future extensions.
 
 <br>
 
@@ -16,43 +15,47 @@ This repository accompanies research on **multi-class traffic flow modeling usin
 
 </div>
 
-<div align="center">
 
 ### 📈 [Explore the Scientific Figures & Numerical Results Gallery](results/figures/README.md)
 
-</div>
-
-
-<div align="center">
-
 ### 💻 [Explore the Source Code & Numerical Implementations](src/README.md)
 
-</div>
 
 ---
-## Models
+## Mathematical Models
 
-The multi-class implementations support three traffic cost formulations:
+The macroscopic formulation describes the interactions of heterogeneous vehicle populations through a coupled system of continuity equations, Hamilton–Jacobi–Bellman equations, and optimal velocity conditions.
+
+The multi-class numerical implementations support three cost formulations:
 
 | Model | Description |
-| --- | --- |
-| GLWR | Generalized Lighthill–Whitham–Richards |
-| GS | Generalized Separable |
-| GNS | Generalized Non-Separable |
+|:---|:---|
+| **GLWR** | Generalized Lighthill–Whitham–Richards |
+| **GS** | Generalized Separable |
+| **GNS** | Generalized Non-Separable |
 
-The multi-class implementations support  three distinct initial spatial configurations of cars and trucks:
+The framework considers class-dependent traffic densities, velocity constraints, and congestion costs.
+
+### Initial Traffic Configurations
+
+The numerical investigations presented in the associated research consider three spatial arrangements of cars and trucks:
 
 | Configuration | Description |
 |:---:|:---|
-| **CT — Cars–Trucks** | Fully segregated configuration with cars initially positioned in front of trucks. |
-| **TC — Trucks–Cars** | Fully segregated configuration with trucks initially positioned in front of cars. |
-| **TCT — Trucks–Cars–Trucks** | Interlaced configuration with alternating groups of trucks and cars. |
+| **CT — Cars–Trucks** | Cars initially positioned in front of trucks |
+| **TC — Trucks–Cars** | Trucks initially positioned in front of cars |
+| **TCT — Trucks–Cars–Trucks** | Trucks and cars arranged in successive groups |
 
-The macroscopic formulation couples a continuity equation, a Hamilton–Jacobi–Bellman equation, and an optimal velocity condition for each vehicle class. The associated research also examines finite-player traffic games and micro–macro comparisons.
+The simulations examine density evolution, class-dependent velocities, and interactions between vehicle populations under different initial conditions.
 
-The simulations analyze density evolution, class-dependent velocities, interactions between vehicle populations, and numerical regularity.
+### Mean-Field and Microscopic Dynamics
 
-The investigations provide computational evidence supporting the effectiveness of the ε-Nash approximation.
+In addition to the macroscopic PDE system, the associated research investigates finite-player traffic games and compares their dynamics with mean-field solutions.
+
+The numerical investigations provide computational evidence for the approximation of finite-player Nash equilibria using mean-field equilibrium controls.
+
+The published model considers single-lane traffic and does not explicitly impose microscopic collision-avoidance constraints.
+
 
 ---
 
