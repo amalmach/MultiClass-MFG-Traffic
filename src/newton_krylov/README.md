@@ -1,40 +1,16 @@
 # Newton–Krylov Solvers for Traffic Mean-Field Games
 
-### Single-Class, Two-Class, and General Multi-Class Models
-
 This directory contains Python implementations of Newton–Krylov methods
 for solving traffic flow models formulated within the framework of
 **Mean-Field Games (MFGs)**.
 
 The implementations cover three levels of model complexity:
 
-- **Single-class traffic models:** one homogeneous population of vehicles.
-- **Two-class traffic models:** two interacting vehicle populations.
-- **General multi-class traffic models:** an arbitrary number of vehicle classes, $J \geq 1$.
-
-The numerical methods are based on the research presented in the associated
-journal article and PhD thesis.
-
-**Research article**
-
-A. Machtalay, A. Habbal, A. Ratnani, and I. Kissami (2025).
-
-*Computational investigations of a multi-class traffic flow model:
-mean-field and microscopic dynamics.*
-
-**Transportation Research Part B: Methodological**, 195, 103196.
-
-[Research article — DOI](https://doi.org/10.1016/j.trb.2025.103196)
-
-**PhD thesis**
-
-A. Machtalay (2026).
-
-*Micro–macro modeling and scalable numerical methods for high-dimensional
-mean-field and control systems: structure-exploiting solvers and
-low-rank techniques.*
-
-[PhD Thesis — HAL](https://theses.hal.science/tel-05806256/document)
+| Directory | Description |
+|:---|:---|
+| [`one_class/`](one_class/) | Single-class traffic MFG implementation |
+| [`two_class/`](two_class/) | Two-class traffic MFG implementation |
+| [`multi_class/`](multi_class/) | General $J$-class Newton–GMRES solver |
 
 ---
 
