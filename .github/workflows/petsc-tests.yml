@@ -64,6 +64,8 @@ jobs:
         shell: bash -el {0}
         env:
           PRTE_MCA_rmaps_default_mapping_policy: ":oversubscribe"
+          OMPI_MCA_pml: "ob1"
+          OMPI_MCA_btl: "self,tcp"
         run: |
           python -m pytest \
             tests/test_mpi_consistency.py \
