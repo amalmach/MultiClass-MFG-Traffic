@@ -85,20 +85,6 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
 
 See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. 
 
-## Numerical verification
-
-For a three-class test with $N_x=5$ spatial cells, $N_t=8$ time steps, and 390 unknowns, the GLWR, GS, and GNS implementations were evaluated using 1, 2, and 4 MPI processes. The tested solutions agreed across process counts within numerical tolerance and conserved class-wise discrete mass.
-
-Comparisons with the sequential Newton–GMRES implementation gave the following relative $L^2$ differences:
-
-| Model | Relative $L^2$ difference (sequential vs. PETSc) |
-| --- | ---: |
-| GLWR | $1.11\times10^{-12}$ |
-| GS | $9.65\times10^{-12}$ |
-| GNS | $9.10\times10^{-9}$ |
-
-These are small-grid numerical consistency checks, not parallel performance benchmarks. Additional numerical figures are available in the [results gallery](results/figures/README.md).
-
 ---
 ## Numerical Results & Scientific Visualizations
 
