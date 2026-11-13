@@ -30,9 +30,6 @@ The mathematical equations are imported from:
 
 The parallel residual and Jacobian callbacks currently
 reconstruct the global state on every process.
-
-This is a reference implementation for correctness testing,
-not an optimized distributed assembly implementation.
 """
 
 import argparse
