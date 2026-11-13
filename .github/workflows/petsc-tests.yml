@@ -1,0 +1,68 @@
+name: PETSc MPI Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  petsc-tests:
+    name: PETSc and MPI Numerical Tests
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up PETSc environment
+        uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: traffic-petsc
+          create-args: >-
+            python=3.11
+            numpy
+            scipy
+            pytest
+            mpi4py
+            openmpi
+            petsc
+            petsc4py
+          init-shell: bash
+          condarc: |
+            channels:
+              - conda-forge
+            channel_priority: strict
+
+      - name: Verify PETSc and MPI installation
+        shell: bash -el {0}
+        run: |
+          python -c "from petsc4py import PETSc; print('PETSc:', PETSc.Sys.getVersion())"
+          python -c "from mpi4py import MPI; print('MPI:', MPI.Get_version())"
+          mpirun --version
+
+      - name: Run PETSc solver tests
+        shell: bash -el {0}
+        run: |
+          python -m pytest \
+            tests/test_petsc_solver.py \
+            tests/test_solver_consistency.py \
+            -v --tb=short
+
+      - name: Run MPI consistency tests
+        shell: bash -el {0}
+        run: |
+          python -m pytest \
+            tests/test_mpi_consistency.py \
+            -v --tb=short
