@@ -18,8 +18,6 @@ Supports:
     - Artificial viscosity
     - Preconditioning
     - Multigrid refinement
-
-The original research source files are not modified.
 """
 
 from pathlib import Path
