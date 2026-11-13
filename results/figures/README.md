@@ -64,7 +64,6 @@ The macroscopic simulations describe the evolution of traffic density, optimal v
 <div align="center">
 
 <img src="one_class_macroscopic_dynamics.png"
-     alt="One-class macroscopic dynamics for LWR, Separable, and Non-Separable models"
      width="900">
 
 <br>
