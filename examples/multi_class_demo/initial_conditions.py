@@ -136,15 +136,6 @@ def get_initial_configuration(
 
     else:
 
-        # Original six-peak configuration.
-        #
-        # Road layout:
-        #
-        # Trucks  Cars  Trucks  Cars  Trucks  Cars
-        #   0.5    1.5    2.5    3.5    4.5    5.5
-        #
-        # Road length: L = 6
-
         L = 6.0
 
         car_centers = (
