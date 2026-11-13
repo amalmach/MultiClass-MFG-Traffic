@@ -98,7 +98,9 @@ For solver parameters and numerical options, see the [Newton–Krylov documentat
 
 ### Parallel multi-class solver
 
-Requires a compatible installation of PETSc, MPI, `petsc4py`, and `mpi4py`, with MUMPS support for the command below.
+Requires PETSc, MPI, `petsc4py`, and `mpi4py`, with MUMPS support.
+
+The implementation uses PETSc SNES for nonlinear Newton iterations and MUMPS for sparse direct factorization.
 
 ```bash
 mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
@@ -106,17 +108,14 @@ mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
     --model GLWR \
     --nx 5 \
     --nt 8 \
-    --output petsc_J3_GLWR_MPI2.npz \
-    -ksp_type preonly \
-    -pc_type lu \
-    -pc_factor_mat_solver_type mumps
+    --tol 1e-8 \
+    --output petsc_J3_GLWR_MPI2.npz
 ```
 
-The parallel implementation uses PETSc SNES for nonlinear solution and supports the GLWR, GS, and GNS formulations.
+The solver supports the GLWR, GS, and GNS formulations. The number of vehicle classes can be specified using `--J`.
 
-Installation instructions and additional solver options are provided in the [PETSc/MPI documentation](src/petsc4py/README.md).
+For installation instructions and additional options, see the [PETSc/MPI documentation](src/petsc4py/README.md).
 
----
 ## References
 
 ### Journal Article
