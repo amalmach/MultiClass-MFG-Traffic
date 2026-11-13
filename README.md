@@ -61,18 +61,19 @@ The published model considers single-lane traffic and does not explicitly impose
 
 ## Quick start
 
-Run the commands below from the repository root.
+The following commands should be executed from the repository root.
 
 ### Single-class example
 
 Requires Python, NumPy, and SciPy.
 
 ```bash
-python3 examples/one_class_demo/run_demo.py --help
 python3 examples/one_class_demo/run_demo.py
 ```
 
-The [interactive notebook](notebooks/one_class_LWR.ipynb) can also be opened through [Binder](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb).
+An interactive version is available in the [single-class LWR notebook](notebooks/one_class_LWR.ipynb).
+
+The notebook can also be opened through [Binder](https://mybinder.org/v2/gh/amalmach/MultiClass-MFG-Traffic/main?labpath=notebooks%2Fone_class_LWR.ipynb).
 
 ### Sequential multi-class solver
 
@@ -80,11 +81,17 @@ Requires Python, NumPy, and SciPy.
 
 ```bash
 python3 src/newton_krylov/multi_class/main.py \
-    --J 3 --model GLWR --nx 5 --nt 8 --max-grids 1 \
+    --J 3 \
+    --model GLWR \
+    --nx 5 \
+    --nt 8 \
+    --max-grids 1 \
     --output sequential_J3_GLWR.npz
 ```
 
-Replace `GLWR` with `GS` or `GNS` to select another cost model. See the [Newton–Krylov documentation](src/newton_krylov/README.md) for numerical parameters and refinement options.
+The `--model` argument accepts `GLWR`, `GS`, or `GNS`, and `--J` specifies the number of vehicle classes.
+
+For solver parameters and numerical options, see the [Newton–Krylov documentation](src/newton_krylov/README.md).
 
 ### Parallel multi-class solver
 
@@ -92,19 +99,24 @@ Requires a compatible installation of PETSc, MPI, `petsc4py`, and `mpi4py`, with
 
 ```bash
 mpirun -np 2 python3 src/petsc4py/multi_class/main.py \
-    --J 3 --model GLWR --nx 5 --nt 8 \
+    --J 3 \
+    --model GLWR \
+    --nx 5 \
+    --nt 8 \
     --output petsc_J3_GLWR_MPI2.npz \
     -ksp_type preonly \
     -pc_type lu \
     -pc_factor_mat_solver_type mumps
 ```
 
-See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and solver options. 
+The parallel implementation uses PETSc SNES for nonlinear solution and supports the GLWR, GS, and GNS formulations.
+
+Installation instructions and additional solver options are provided in the [PETSc/MPI documentation](src/petsc4py/README.md).
 
 ---
 ## References
 
-### Journal Publication — 2025
+### Journal Article
 
 **A. Machtalay, A. Habbal, A. Ratnani, I. Kissami**
 
@@ -124,29 +136,14 @@ See the [PETSc/MPI documentation](src/petsc4py/README.md) for installation and s
 
 **Université Côte d’Azur & Mohammed VI Polytechnic University**, 2026.
 
-**Relevant material:** Chapter II — Multi-class traffic modeling and computational investigations.
+**Relevant material:** Chapter II — Multi-class traffic modeling and computational investigations and Appendix D on the numerical implementations.
 
 [![Thesis](https://img.shields.io/badge/Read_PhD_Thesis-HAL-6F42C1)](https://theses.hal.science/tel-05806256/document)
 
-
 ---
 
-<div align="center">
+## License
 
-### Mathematical Modeling · Scientific Computing · Computational Engineering
+This repository is distributed under the [GNU General Public License, version 3](LICENSE).
 
-*From game-theoretic traffic models to large-scale computation and reproducible numerical experiments.*
-
-<br>
-
-[![GitHub](https://img.shields.io/badge/Explore_Source_Code-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/amalmach/MultiClass-MFG-Traffic)
-
-<br>
-
-[Research Paper](https://doi.org/10.1016/j.trb.2025.103196)
-&nbsp;·&nbsp;
-[PhD Thesis](https://theses.hal.science/tel-05806256/document)
-&nbsp;·&nbsp;
-[Original Release](https://github.com/amalmach/MultiClass-MFG-Traffic/releases/tag/v1.0.0-original)
-
-</div>
+The [original research-code release](https://github.com/amalmach/MultiClass-MFG-Traffic/releases/tag/v1.0.0-original) is available for reference.
