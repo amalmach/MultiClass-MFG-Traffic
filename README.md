@@ -27,8 +27,6 @@ This repository accompanies research on **multi-class traffic flow modeling usin
 
 ### 💻 [Explore the Source Code & Numerical Implementations](src/README.md)
 
-<sub>Newton–Krylov Methods · PETSc · Parallel Computing · Numerical Experiments</sub>
-
 </div>
 
 ---
