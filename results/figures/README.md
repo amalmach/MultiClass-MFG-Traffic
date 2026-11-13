@@ -19,6 +19,13 @@ The results are associated with the [research article](https://doi.org/10.1016/j
 
 <br>
 
+![Single-class initial density](one_class_initial_density.png)
+
+Initial density distribution for the single-class traffic model.
+
+**Source:** PhD thesis, Figure II.1.
+
+
 This figure illustrates the initial density distribution used in the
 single-class traffic model, considering a population of cars.
 
