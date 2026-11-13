@@ -44,33 +44,19 @@ Explore the numerical methods directly in your browser using
 ---
 
 <details>
-<summary><h2>🎯 Main Scientific Contributions</h2></summary>
+<summary><h2>📐 MModels</h2></summary>
 
 <br>
 
-The research combines mathematical modeling, numerical analysis, scientific computing, and traffic engineering.
+The multi-class implementations support three traffic cost formulations:
 
-### 1. Multi-Class Traffic Modeling
+| Model | Description |
+| --- | --- |
+| GLWR | Generalized Lighthill–Whitham–Richards |
+| GS | Generalized Separable |
+| GNS | Generalized Non-Separable |
 
-Extension of a single-class traffic framework to heterogeneous vehicle populations.
-
-The mathematical formulation connects microscopic finite-player differential games with macroscopic Nash Mean-Field Games.
-
-### 2. Class-Dependent Traffic Objectives
-
-Investigation of three families of cost functionals:
-
-- **GLWR:** Generalized Lighthill–Whitham–Richards.
-- **GS:** Generalized Separable.
-- **GNS:** Generalized Non-Separable.
-
-These models allow the investigation of different traffic behaviors and interactions between vehicle populations.
-
-### 3. Investigation of Different Initial Traffic Configurations
-
-Systematic numerical investigation of three distinct initial spatial configurations of cars and trucks to analyze the influence of vehicle-class distributions on multi-class traffic dynamics.
-
-The three configurations considered are:
+The multi-class implementations support  three distinct initial spatial configurations of cars and trucks:
 
 | Configuration | Description |
 |:---:|:---|
@@ -78,180 +64,11 @@ The three configurations considered are:
 | **TC — Trucks–Cars** | Fully segregated configuration with trucks initially positioned in front of cars. |
 | **TCT — Trucks–Cars–Trucks** | Interlaced configuration with alternating groups of trucks and cars. |
 
-These configurations are investigated under different traffic cost functionals (**GLWR, GS, and GNS**).
-
-### 4. Large-Scale Numerical Algorithms
-
-Development and investigation of computational methodologies combining:
-
-- Space–time finite difference discretization.
-- Newton-type nonlinear iterations.
-- Newton–Krylov methods.
-- LGMRES iterative solvers.
-- Regularization-continuation techniques.
-- Preconditioning and initialization strategies.
-- Parallel computing.
-
-### 5. Multi-Class Numerical Simulations
-
-Extensive numerical investigations involving different configurations of cars and trucks.
+The macroscopic formulation couples a continuity equation, a Hamilton–Jacobi–Bellman equation, and an optimal velocity condition for each vehicle class. The associated research also examines finite-player traffic games and micro–macro comparisons.
 
 The simulations analyze density evolution, class-dependent velocities, interactions between vehicle populations, and numerical regularity.
 
-### 6. Micro–Macro Consistency
-
-Numerical comparison of macroscopic mean-field controls and microscopic best-response strategies.
-
 The investigations provide computational evidence supporting the effectiveness of the ε-Nash approximation.
-
-### 7. High-Performance Computing
-
-The associated publication reports numerical investigations of nonlinear systems involving up to approximately **88 million unknowns**.
-
-The computational methodology includes PETSc-based parallel implementations and MPI.
-
-**Scientific references:**
-- [Research Paper](https://doi.org/10.1016/j.trb.2025.103196)
-- [PhD Thesis — Chapter II](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
----
-
-<details>
-<summary><h2>📐 Mathematical Modeling</h2></summary>
-
-<br>
-
-The mathematical framework connects individual vehicle dynamics with collective traffic behavior through Mean-Field Game theory.
-
-<details>
-<summary><strong>🚗 1. Microscopic Traffic Model — Finite-Player Differential Games</strong></summary>
-
-<br>
-
-At the microscopic level, vehicles are modeled as individual agents belonging to different classes.
-
-For vehicle $i$ of class $j$, its position evolves according to: $d x_i^j(t)=v_i^j(t) dt,$
-
-where:
-
-- $x_i^j(t)$ is the vehicle position.
-- $v_i^j(t)$ is its velocity control.
-- $j$ denotes the vehicle class.
-
-Each vehicle seeks to minimize an individual cost functional depending on its control, its trajectory, and interactions with other vehicles.
-
-The resulting system is formulated as a **finite-player differential game**.
-
-The objective is to investigate the strategic behavior of interacting vehicle populations and relate it to the corresponding macroscopic description.
-
-**References:**
-[Research paper, §2.1](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.4.1–II.4.2](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🌐 2. Macroscopic Traffic Model — Nash Mean-Field Games</strong></summary>
-
-<br>
-
-At the macroscopic level, traffic is represented through class-dependent density and velocity fields.
-
-For each vehicle class $j=1,\ldots,J$, the model couples:
-
-**1. A forward continuity equation**: $\displaystyle \partial_t \rho^j + \partial_x(\rho^j u^j) = 0$
-
-**2. A backward Hamilton–Jacobi–Bellman equation**: $\displaystyle \partial_t V^j + H_j(\partial_x V^j,\boldsymbol{\rho}) = 0$
-
-**3. An optimal velocity feedback law**: $\displaystyle u^j = \partial_{p_j}H_j(\partial_x V^j,\boldsymbol{\rho})$
-
-where:
-
-| Symbol | Description |
-|:---|:---|
-| $\rho^j$ | Traffic density of vehicle class $j$ |
-| $u^j$ | Optimal velocity field of class $j$ |
-| $V^j$ | Optimal value function of class $j$ |
-| $H_j$ | Hamiltonian associated with class $j$ |
-| $p_j$ | Gradient of $V^j$ ($p_j=\partial_x V^j$) |
-| $\boldsymbol{\rho}$ | Vector of class-dependent traffic densities |
-| $J$ | Number of vehicle classes |
-
-The Hamiltonian associated with class $j$ is defined by:
-
-<p align="center">
-$H_j(p_j,\boldsymbol{\rho})
-=
-\min_{0\leq\alpha\leq u_{\max}^j}
-\left\{
-f_j(\alpha,\boldsymbol{\rho})+\alpha p_j
-\right\}.$
-</p>
-
-The published numerical experiments consider periodic boundary conditions on a ring road.
-
-**References:**
-[Research paper, §2.1](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §§II.4.3–II.4.7](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>🔄 3. Micro–Macro Connection and ε-Nash Approximation</strong></summary>
-
-<br>
-
-The research investigates the relationship between:
-
-- Microscopic finite-player differential games.
-- Macroscopic Nash Mean-Field Game equilibria.
-- Vehicle-level controls reconstructed from the mean-field solution.
-
-Starting from an optimal macroscopic velocity field, microscopic controls are constructed through: $\widehat{v}_i^j(t) = u^{j,*}\left(t,x_i^j(t)\right).$
-
-The resulting strategies are compared with microscopic best-response controls.
-
-The objective is to assess whether the mean-field-constructed controls provide an **approximate Nash equilibrium** for the finite-player traffic game.
-
-The approximation quality is studied through differences between individual cost functionals.
-
-These comparisons provide numerical evidence supporting the ε-Nash approximation.
-
-**References:**
-[Research paper, §2.2](https://doi.org/10.1016/j.trb.2025.103196) ·
-[PhD thesis, Chapter II, §II.4.8](https://theses.hal.science/tel-05806256/document)
-
-</details>
-
-<br>
-
-<details>
-<summary><strong>📖 4. Mathematical Analysis and Theoretical Foundations</strong></summary>
-
-<br>
-
-The mathematical foundations include:
-
-- Mean-Field Game formulations.
-- Finite-player differential games.
-- Hamilton–Jacobi–Bellman equations.
-- Continuity equations.
-- Nash equilibrium conditions.
-- Approximate Nash equilibria.
-- Connections between microscopic and macroscopic dynamics.
-
-Detailed assumptions, derivations, theoretical discussions, and supporting mathematical results are presented in the PhD thesis.
-
-**Further reading:**
-[PhD Thesis — Chapter II](https://theses.hal.science/tel-05806256/document)
-
-</details>
 
 </details>
 
