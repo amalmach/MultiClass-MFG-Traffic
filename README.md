@@ -205,3 +205,18 @@ See the [numerical testing documentation](tests/README.md) for requirements and 
 This repository is distributed under the [GNU General Public License, version 3](LICENSE).
 
 The [original research-code release](https://github.com/amalmach/MultiClass-MFG-Traffic/releases/tag/v1.0.0-original) is available for reference.
+
+
+---
+
+## Contact and Collaboration
+
+Questions, comments, suggestions, and contributions are welcome!
+
+If you have feedback, encounter an issue, or would like to propose improvements or collaborate on numerical methods and optimization algorithms, feel free to:
+
+- **Open an Issue** in this repository to ask questions, report problems, or share suggestions.
+- **Submit a Pull Request** to propose improvements or contribute to the project.
+- **Contact me directly** at [amachtalay@gmail.com](mailto:amachtalay@gmail.com) to discuss potential research collaborations.
+
+Contributions, constructive feedback, and opportunities for scientific collaboration are always appreciated.
