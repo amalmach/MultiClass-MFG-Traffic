@@ -213,7 +213,7 @@ The [original research-code release](https://github.com/amalmach/MultiClass-MFG-
 
 Questions, comments, suggestions, and contributions are welcome!
 
-If you have feedback, encounter an issue, or would like to propose improvements or collaborate on numerical methods and optimization algorithms, feel free to:
+If you have feedback, encounter an issue, or would like to propose improvements or collaborate on **multi-class traffic flow modeling, mean-field games, numerical methods, or scientific computing**, feel free to:
 
 - **Open an Issue** in this repository to ask questions, report problems, or share suggestions.
 - **Submit a Pull Request** to propose improvements or contribute to the project.
